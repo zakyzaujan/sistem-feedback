@@ -9,7 +9,6 @@ if ($_SESSION['role_user'] !== 'pengguna') {
 
 $id_user = $_SESSION['id_user']; 
 
-// Query untuk mengambil nama pengguna
 $sql_user = "SELECT nama_user FROM user WHERE id_user = '$id_user'";
 $result_user = $conn->query($sql_user);
 $user = $result_user->fetch_assoc();
@@ -47,10 +46,9 @@ $nama_user = $user['nama_user'];
     </style>
 </head>
 <body class="bg-light">
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#">Sistem Feedback</a>
+            <a class="navbar-brand fw-bold" href="#">Sistem Feedback | Pengguna</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -77,7 +75,6 @@ $nama_user = $user['nama_user'];
         <div class="dashboard-container">
             <h2 class="text-center mb-4">Selamat Datang, <b><?= $nama_user ?></b></h2>
 
-            <!-- Info Section -->
             <div class="row mb-4">
                 <div class="col-md-4">
                     <div class="info-card">
@@ -120,7 +117,6 @@ $nama_user = $user['nama_user'];
                 </div>
             </div>
 
-            <!-- CTA Buttons -->
             <div class="text-center">
                 <a href="kirim_feedback.php" class="btn btn-primary btn-lg me-2">Kirim Feedback</a>
                 <a href="feedback_saya.php" class="btn btn-outline-primary btn-lg">Lihat Feedback Saya</a>

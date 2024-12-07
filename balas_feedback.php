@@ -2,17 +2,14 @@
 session_start();
 include 'config.php';
 
-// Cek jika pengguna memiliki hak akses
 if ($_SESSION['role_user'] !== 'karyawan') {
     header('Location: index.php');
     exit;
 }
 
-// Cek apakah ada ID feedback yang dikirim
 if (isset($_GET['id'])) {
     $id_feedback = $_GET['id'];
 
-    // Ambil data feedback berdasarkan ID
     $sql_feedback = "SELECT feedback.*, kategori_feedback.nama_kategori, user.nama_user 
                      FROM feedback 
                      INNER JOIN kategori_feedback ON feedback.id_kategori = kategori_feedback.id_kategori 
@@ -24,7 +21,6 @@ if (isset($_GET['id'])) {
     $result_feedback = $stmt->get_result();
     $feedback = $result_feedback->fetch_assoc();
 
-    // Jika feedback tidak ditemukan, arahkan ke halaman daftar feedback
     if (!$feedback) {
         header('Location: daftar_feedback.php');
         exit;
@@ -32,17 +28,15 @@ if (isset($_GET['id'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Ambil data balasan dari form
+
     $balasan = $_POST['balasan'];
 
-    // Update status feedback menjadi 'selesai'
     $sql_update = "UPDATE feedback SET status = 'selesai' WHERE id_feedback = ?";
     $stmt_update = $conn->prepare($sql_update);
     $stmt_update->bind_param("i", $id_feedback);
     $stmt_update->execute();
 
-    // Catat log aktivitas
-    $id_karyawan = $_SESSION['id_user'];  // ID karyawan yang login
+    $id_karyawan = $_SESSION['id_user'];
     $tanggal_balasan = date('Y-m-d H:i:s');
     $sql_log = "INSERT INTO log_aktivitas (id_feedback, id_karyawan, balasan, tanggal_balasan) 
                 VALUES (?, ?, ?, ?)";
@@ -50,7 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt_log->bind_param("iiss", $id_feedback, $id_karyawan, $balasan, $tanggal_balasan);
     $stmt_log->execute();
 
-    // Redirect ke halaman log aktivitas atau feedback diproses
     header('Location: feedback_diproses.php');
     exit;
 }

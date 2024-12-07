@@ -9,7 +9,6 @@ if ($_SESSION['role_user'] !== 'karyawan') {
 
 $id_user = $_SESSION['id_user'];
 
-// Query untuk mengambil nama pengguna
 $sql_user = "SELECT nama_user FROM user WHERE id_user = '$id_user'";
 $result_user = $conn->query($sql_user);
 $user = $result_user->fetch_assoc();
@@ -43,7 +42,6 @@ $nama_user = $user['nama_user'];
     </style>
 </head>
 <body class="bg-light">
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand fw-bold" href="#">Sistem Feedback | Karyawan</a>
@@ -75,7 +73,6 @@ $nama_user = $user['nama_user'];
             <p class="mt-3">Silakan pilih menu di atas untuk memulai!</p>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

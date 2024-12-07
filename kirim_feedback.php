@@ -9,7 +9,6 @@ if ($_SESSION['role_user'] !== 'pengguna') {
 
 $id_user = $_SESSION['id_user']; 
 
-// Query untuk mendapatkan semua kategori feedback
 $result_kategori = $conn->query("SELECT * FROM kategori_feedback");
 ?>
 
@@ -44,7 +43,6 @@ $result_kategori = $conn->query("SELECT * FROM kategori_feedback");
     </style>
 </head>
 <body class="bg-light">
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="dashboard_user.php">Sistem Feedback | Pengguna</a>
@@ -88,8 +86,14 @@ $result_kategori = $conn->query("SELECT * FROM kategori_feedback");
             </div>
             <button type="submit" class="btn btn-primary w-100">Kirim Feedback</button>
         </form>
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Copyright &copy; Kelompok 5 2024</div>
+                </div>
+            </div>
+        </footer>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

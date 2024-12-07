@@ -9,7 +9,6 @@ if ($_SESSION['role_user'] !== 'pengguna') {
 
 $id_user = $_SESSION['id_user']; 
 
-// Query untuk mengambil nama pengguna
 $sql_user = "SELECT nama_user FROM user WHERE id_user = '$id_user'";
 $result_user = $conn->query($sql_user);
 $user = $result_user->fetch_assoc();
@@ -46,7 +45,6 @@ $user = $result_user->fetch_assoc();
     </style>
 </head>
 <body class="bg-light">
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="dashboard_user.php">Sistem Feedback | Pengguna</a>
@@ -90,6 +88,13 @@ $user = $result_user->fetch_assoc();
                 </div>
             </div>
         </div>
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Copyright &copy; Kelompok 5 2024</div>
+                </div>
+            </div>
+        </footer>
     </div> 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>

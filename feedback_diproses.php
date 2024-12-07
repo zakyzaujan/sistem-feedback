@@ -2,18 +2,16 @@
 session_start();
 include 'config.php';
 
-// Cek jika pengguna memiliki hak akses
 if ($_SESSION['role_user'] !== 'karyawan') {
     header('Location: index.php');
     exit;
 }
 
-// Query untuk mendapatkan feedback yang statusnya diproses
 $sql_feedback = "SELECT feedback.*, kategori_feedback.nama_kategori, user.nama_user 
                  FROM feedback 
                  INNER JOIN kategori_feedback ON feedback.id_kategori = kategori_feedback.id_kategori 
                  INNER JOIN user ON feedback.id_user = user.id_user
-                 WHERE feedback.status = 'diproses'";  // Hanya ambil feedback yang statusnya diproses
+                 WHERE feedback.status = 'diproses'";
 $result_feedback = $conn->query($sql_feedback);
 ?>
 
@@ -24,9 +22,27 @@ $result_feedback = $conn->query($sql_feedback);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback Diproses</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <style>
+        .navbar {
+            border-bottom: 2px solid #dee2e6;
+        }
+        .dashboard-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .info-card {
+            border-left: 4px solid #0d6efd;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body class="bg-light">
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="dashboard_karyawan.php">Sistem Feedback | Karyawan</a>
@@ -52,11 +68,11 @@ $result_feedback = $conn->query($sql_feedback);
         </div>
     </nav>
     <div class="container mt-5">
-        <h3 class="mb-4">Feedback yang Sedang Diproses</h3>
+        <h3 class="text-center mb-4">List Pemrosesan Feedback</h3>
         <div class="blockcode">
             <div class="example">
-                <div class="card card p-5" style="width: 100%">
-                <table class="table table-bordered">
+                <div class="card card p-5" style="width: 100%; min-height: 650px; overflow-y: auto;">
+                <table id="datatablesSimple" class="table table-bordered">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -78,7 +94,6 @@ $result_feedback = $conn->query($sql_feedback);
                                 <td><?= $feedback['nama_kategori']; ?></td>
                                 <td><?= $feedback['status']; ?></td>
                                 <td>
-                                    <!-- Tombol Balas untuk memberikan balasan pada feedback -->
                                     <a href="balas_feedback.php?id=<?= $feedback['id_feedback']; ?>" class="btn btn-primary btn-sm">Balas</a>
                                 </td>
                             </tr>
@@ -88,7 +103,18 @@ $result_feedback = $conn->query($sql_feedback);
                 </div>
             </div>
         </div>
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Copyright &copy; Kelompok 5 2024</div>
+                </div>
+            </div>
+        </footer>
     </div> 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"></script>
+    <script>
+        const datatable = new simpleDatatables.DataTable("#datatablesSimple");
+    </script>
 </body>
 </html>

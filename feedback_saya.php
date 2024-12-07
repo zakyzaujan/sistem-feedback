@@ -9,7 +9,6 @@ if ($_SESSION['role_user'] !== 'pengguna') {
 
 $id_user = $_SESSION['id_user']; 
 
-// Query untuk mendapatkan feedback pengguna
 $sql_feedback_user = "SELECT feedback.*, kategori_feedback.nama_kategori, 
                              log_aktivitas.balasan,
                              log_aktivitas.tanggal_balasan, 
@@ -30,6 +29,7 @@ $result_feedback_user = $conn->query($sql_feedback_user);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback Saya</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <style>
         .navbar {
             border-bottom: 2px solid #dee2e6;
@@ -84,8 +84,8 @@ $result_feedback_user = $conn->query($sql_feedback_user);
         <h3 class="mb-4 text-center">Feedback Saya</h3>
         <div class="blockcode">
             <div class="example">
-                <div class="card card p-5" style="width: 100%">
-                <table class="table table-bordered mt-4">
+                <div class="card card p-5" style="width: 100%; min-height: 650px; overflow-y: auto;">
+                <table id="datatablesSimple" class="table table-bordered">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -93,9 +93,9 @@ $result_feedback_user = $conn->query($sql_feedback_user);
                             <th>Kategori</th>
                             <th>Isi</th>
                             <th>Status</th>
-                            <th>Nama Karyawan</th> <!-- Kolom untuk nama karyawan -->
-                            <th>Balasan</th> <!-- Kolom untuk balasan -->
-                            <th>Tanggal Balasan</th> <!-- Kolom untuk nama karyawan -->
+                            <th>Nama Karyawan</th>
+                            <th>Balasan</th>
+                            <th>Tanggal Balasan</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -106,16 +106,27 @@ $result_feedback_user = $conn->query($sql_feedback_user);
                                 <td><?= $feedback['nama_kategori']; ?></td>
                                 <td><?= $feedback['isi_feedback']; ?></td>
                                 <td><?= $feedback['status']; ?></td>
-                                <td><?= $feedback['nama_karyawan'] ? $feedback['nama_karyawan'] : '( - )'; ?></td> <!-- Menampilkan nama karyawan -->
-                                <td><?= $feedback['balasan'] ? $feedback['balasan'] : '(Belum Dibalas)'; ?></td> <!-- Menampilkan balasan -->
-                                <td><?= $feedback['tanggal_balasan'] ? $feedback['tanggal_balasan'] : '( - )'; ?></td> <!-- Menampilkan nama karyawan -->
+                                <td><?= $feedback['nama_karyawan'] ? $feedback['nama_karyawan'] : '( - )'; ?></td>
+                                <td><?= $feedback['balasan'] ? $feedback['balasan'] : '(Belum Dibalas)'; ?></td>
+                                <td><?= $feedback['tanggal_balasan'] ? $feedback['tanggal_balasan'] : '( - )'; ?></td>
                         <?php endwhile; ?>
                     </tbody>
                 </table>
                 </div>
             </div>
         </div>
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Copyright &copy; Kelompok 5 2024</div>
+                </div>
+            </div>
+        </footer>
     </div> 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"></script>
+    <script>
+        const datatable = new simpleDatatables.DataTable("#datatablesSimple");
+    </script>
 </body>
 </html>
