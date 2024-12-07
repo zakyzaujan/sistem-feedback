@@ -18,7 +18,7 @@ $result_log = $conn->query($sql_log);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log Aktivitas</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <style>
         .navbar {
@@ -36,6 +36,16 @@ $result_log = $conn->query($sql_log);
             padding: 15px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-danger {
+            background-color: #dc3545 !important;
+            border-color: #dc3545 !important;
+            color: white !important;
+        }
+
+        .btn-danger:hover {
+            background-color: darkred !important;
+            border-color: darkred !important;
         }
     </style>
 </head>
@@ -59,7 +69,7 @@ $result_log = $conn->query($sql_log);
                         <a class="nav-link fw-bold" href="log_aktivitas.php">Log Aktivitas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn btn-danger text-white" href="logout.php">Logout</a>
+                        <a class="nav-link btn btn-danger" href="logout.php">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -105,7 +115,7 @@ $result_log = $conn->query($sql_log);
             </div>
         </footer>
     </div> 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"></script>
     <script>
         const datatable = new simpleDatatables.DataTable("#datatablesSimple");

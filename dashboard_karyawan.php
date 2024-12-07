@@ -21,7 +21,7 @@ $nama_user = $user['nama_user'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Karyawan</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .navbar {
             border-bottom: 2px solid #dee2e6;
@@ -38,6 +38,16 @@ $nama_user = $user['nama_user'];
             padding: 15px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-danger {
+            background-color: #dc3545 !important;
+            border-color: #dc3545 !important;
+            color: white !important;
+        }
+
+        .btn-danger:hover {
+            background-color: darkred !important;
+            border-color: darkred !important;
         }
     </style>
 </head>
@@ -60,7 +70,7 @@ $nama_user = $user['nama_user'];
                         <a class="nav-link" href="log_aktivitas.php">Log Aktivitas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn btn-danger text-white" href="logout.php">Logout</a>
+                        <a class="nav-link btn btn-danger" href="logout.php">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -73,6 +83,6 @@ $nama_user = $user['nama_user'];
             <p class="mt-3">Silakan pilih menu di atas untuk memulai!</p>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

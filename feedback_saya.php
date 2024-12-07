@@ -28,7 +28,7 @@ $result_feedback_user = $conn->query($sql_feedback_user);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback Saya</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <style>
         .navbar {
@@ -50,6 +50,16 @@ $result_feedback_user = $conn->query($sql_feedback_user);
         .info-card h4 {
             margin-bottom: 0;
             color: #0d6efd;
+        }
+        .btn-danger {
+            background-color: #dc3545 !important;
+            border-color: #dc3545 !important;
+            color: white !important;
+        }
+
+        .btn-danger:hover {
+            background-color: darkred !important;
+            border-color: darkred !important;
         }
     </style>
 </head>
@@ -73,7 +83,7 @@ $result_feedback_user = $conn->query($sql_feedback_user);
                         <a class="nav-link" href="profil_saya.php">Info Profil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn btn-danger text-white" href="logout.php">Logout</a>
+                        <a class="nav-link btn btn-danger" href="logout.php">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -123,7 +133,7 @@ $result_feedback_user = $conn->query($sql_feedback_user);
             </div>
         </footer>
     </div> 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"></script>
     <script>
         const datatable = new simpleDatatables.DataTable("#datatablesSimple");
