@@ -19,7 +19,7 @@ $user = $result_user->fetch_assoc();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil Saya</title>
+    <title>Profil Saya - Sistem Feedback | Pengguna</title>
     <link href="assets/css/pages/profil_user.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 </head>
