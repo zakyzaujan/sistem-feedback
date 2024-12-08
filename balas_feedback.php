@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt_log->bind_param("iiss", $id_feedback, $id_karyawan, $balasan, $tanggal_balasan);
     $stmt_log->execute();
 
+    $_SESSION['balasan_dikirim'] = "Balasan berhasil dikirim!";
     header('Location: feedback_diproses.php');
     exit;
 }
@@ -55,23 +56,45 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Balas Feedback</title>
+    <link href="assets/css/pages/balas_feedback.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
-    <div class="container mt-5">
-        <h3 class="mb-4">Balas Feedback</h3>
-        <form method="POST">
-            <div class="mb-3">
-                <label for="isi_feedback" class="form-label">Isi Feedback</label>
-                <textarea class="form-control" id="isi_feedback" rows="4" readonly><?= $feedback['isi_feedback']; ?></textarea>
+    <div class="wrapper">
+        <div class="side-wallpaper"></div>
+        <div class="main-content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container">
+                    <a href="feedback_diproses.php" class="btn btn-warning"> <i class="fa-solid fa-arrow-left"></i> Kembali </a>
+                </div>
+            </nav>
+
+            <div class="container mt-5">
+                <h3 class="mb-4 text-center"><i class="fa-solid fa-reply"></i> Balas Feedback</h3>
+                <p class="text-muted text-center">Berikan respons terhadap feedback yang diberikan oleh pengguna.</p>
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="col-md-8 col-lg-7">
+                        <form method="POST">
+                            <div class="mb-3">
+                                <label for="isi_feedback" class="form-label">Isi Feedback</label>
+                                <textarea class="form-control" id="isi_feedback" rows="4" readonly><?= $feedback['isi_feedback']; ?></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="balasan" class="form-label">Balasan</label>
+                                <textarea class="form-control" id="balasan" name="balasan" rows="4" required></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-success mt-3"><i class="fa-regular fa-paper-plane"></i>  Kirim Balasan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="balasan" class="form-label">Balasan</label>
-                <textarea class="form-control" id="balasan" name="balasan" rows="4" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-success">Kirim Balasan</button>
-        </form>
+
+        </div>
+        <div class="side-wallpaper"></div>
     </div>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -2,6 +2,9 @@
 session_start();
 include 'config.php';
 
+$success = isset($_SESSION['success']) ? $_SESSION['success'] : null;
+unset($_SESSION['success']);
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nama_user = $_POST['nama_user'];
     $password = $_POST['password'];
@@ -21,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         exit;
     } else {
-        $error = "Email atau password salah!";
+        $error = "Nama atau password tidak sesuai!";
     }
 }
 ?>
@@ -31,30 +34,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login - Sistem Feedback</title>
+    <link href="assets/css/pages/login.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="bg-light">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-4">
-                <h2 class="text-center mt-5">Login</h2>
-                <form method="POST" action="">
-                    <?php if (isset($error)) echo "<div class='alert alert-danger'>$error</div>"; ?>
-                    <div class="mb-3">
-                        <label for="nama_user" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="nama_user" name="nama_user" placeholder="Masukkan Nama" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="●●●●" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Login</button>
-                </form>
-                <p class="mt-3 text-center">Belum punya akun? <a href="register.php">Daftar di sini</a></p>
+<body>
+    <div class="card p-4" style="width: 100%; max-width: 400px;">
+        <h2 class="text-center mb-4"><i class="fa-solid fa-right-to-bracket"></i> Login</h2>
+        <form method="POST" action="">
+            <!-- Alert Sukses -->
+            <?php if ($success): ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <?= htmlspecialchars($success); ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif; ?>
+            <!-- Alert Gagal -->
+            <?php if (isset($error)) : ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <?= htmlspecialchars($error); ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif; ?>
+            <div class="mb-3">
+                <label for="nama_user" class="form-label">Nama</label>
+                <input type="text" class="form-control" id="nama_user" name="nama_user" placeholder="Masukkan Nama" required>
             </div>
-        </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="●●●●" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+        <p class="mt-3 text-center">Belum punya akun? <a href="register.php" class="text-primary">Daftar di sini</a></p>
     </div>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </body>
 </html>

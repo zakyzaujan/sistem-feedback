@@ -1,0 +1,84 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.wrapper {
+    display: flex;
+    height: 100%;
+}
+
+.side-wallpaper {
+    background-image: linear-gradient(to top, #88d3ce 0%, #6e45e2 100%);
+    width: 10%;
+    min-width: 150px;
+    height: 100%;
+}
+
+.main-content {
+    flex: 1;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.main-content::-webkit-scrollbar{
+    width: 0px;
+    height: 0px;
+}
+
+.navbar {
+    border-bottom: 2px solid #dee2e6;
+}
+
+.navbar-nav .nav-link {
+    transition: color 0.1s ease, font-weight 0.1s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #4e73df;
+    font-weight: bold;
+}
+
+#judul:hover {
+    color: #4e73df;
+    font-weight: bold;
+}
+
+#laman_sekarang {
+    color: #4e73df;
+    font-weight: bold;
+}
+
+.dashboard-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.info-card {
+    border-left: 4px solid #0d6efd;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.info-card h4 {
+    margin-bottom: 0;
+    color: #0d6efd;
+}
+
+.btn-secondary {
+    background-color: #4e73df !important;
+    border-color: #4e73df !important;
+    color: white !important;
+}
+
+.btn-secondary:hover {
+    background-color: #2e59d9 !important;
+    border-color: #2e59d9 !important;
+}

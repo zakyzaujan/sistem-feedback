@@ -15,6 +15,7 @@ if (isset($_POST['id_feedback'])) {
     $stmt->bind_param("i", $id_feedback);
     $stmt->execute();
 
+    $_SESSION['feedback_diproses'] = "Status feedback telah diubah menjadi 'Diproses.'";
     header('Location: feedback_diproses.php');
     exit;
 } else {

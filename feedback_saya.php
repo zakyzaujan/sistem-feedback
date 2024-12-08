@@ -28,112 +28,125 @@ $result_feedback_user = $conn->query($sql_feedback_user);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback Saya</title>
+    <link href="assets/css/pages/feedback_saya.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-    <style>
-        .navbar {
-            border-bottom: 2px solid #dee2e6;
-        }
-        .dashboard-container {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .info-card {
-            border-left: 4px solid #0d6efd;
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .info-card h4 {
-            margin-bottom: 0;
-            color: #0d6efd;
-        }
-        .btn-danger {
-            background-color: #dc3545 !important;
-            border-color: #dc3545 !important;
-            color: white !important;
-        }
-
-        .btn-danger:hover {
-            background-color: darkred !important;
-            border-color: darkred !important;
-        }
-    </style>
 </head>
 <body class="bg-light">
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="dashboard_user.php">Sistem Feedback | Pengguna</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="kirim_feedback.php">Kirim Feedback</a>
-                    </li>
-                    <li class="nav-item fw-bold">
-                        <a class="nav-link" href="feedback_saya.php">Feedback Saya</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="profil_saya.php">Info Profil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-danger" href="logout.php">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <div class="wrapper">
+        <div class="side-wallpaper"></div>
+        <div class="main-content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container">
+                    <a class="navbar-brand" href="dashboard_user.php" id="judul"><i class="fa-solid fa-house"></i> Sistem Feedback | Pengguna</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item me-2">
+                                <a class="nav-link" href="kirim_feedback.php"><i class="fa-regular fa-comment"></i> Kirim Feedback</a>
+                            </li>
+                            <li class="nav-item me-2">
+                                <a class="nav-link fw-bold" href="feedback_saya.php" id="laman_sekarang"><i class="fa-regular fa-folder"></i> Feedback Saya</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle btn btn-secondary" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-regular fa-user"></i>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="profil_user.php"><i class="fa-solid fa-magnifying-glass"></i></i> | Info Profil</a></li>
+                                    <li><a class="dropdown-item" href="logout.php"><i class="fa-solid fa-power-off"></i> | Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
 
-    <div class="container mt-5">
-        <h3 class="mb-4 text-center">Feedback Saya</h3>
-        <div class="blockcode">
-            <div class="example">
-                <div class="card card p-5" style="width: 100%; min-height: 650px; overflow-y: auto;">
-                <table id="datatablesSimple" class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Tanggal</th>
-                            <th>Kategori</th>
-                            <th>Isi</th>
-                            <th>Status</th>
-                            <th>Nama Karyawan</th>
-                            <th>Balasan</th>
-                            <th>Tanggal Balasan</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php while ($feedback = $result_feedback_user->fetch_assoc()) : ?>
-                            <tr>
-                                <td><?= $feedback['id_feedback']; ?></td>
-                                <td><?= $feedback['tanggal_feedback']; ?></td>
-                                <td><?= $feedback['nama_kategori']; ?></td>
-                                <td><?= $feedback['isi_feedback']; ?></td>
-                                <td><?= $feedback['status']; ?></td>
-                                <td><?= $feedback['nama_karyawan'] ? $feedback['nama_karyawan'] : '( - )'; ?></td>
-                                <td><?= $feedback['balasan'] ? $feedback['balasan'] : '(Belum Dibalas)'; ?></td>
-                                <td><?= $feedback['tanggal_balasan'] ? $feedback['tanggal_balasan'] : '( - )'; ?></td>
-                        <?php endwhile; ?>
-                    </tbody>
-                </table>
-                </div>
+            <div class="container mt-5">
+                <h3 class="mb-4 text-center"><i class="fa-regular fa-folder"></i> Feedback Saya</h3>
+                <p class="text-muted text-center">Feedback yang sudah pernah diajukan.</p>
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                            Tabel Feedback Saya                               
+                        </div>
+                        <div class="card-body">
+                            <table id="datatablesSimple" class="table table-bordered table-striped" role="table" aria-label="Tabel Feedback Saya">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Tanggal</th>
+                                        <th>Kategori</th>
+                                        <th>Isi</th>
+                                        <th>Status</th>
+                                        <th>Nama Karyawan</th>
+                                        <th>Balasan</th>
+                                        <th>Tanggal Balasan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php if ($result_feedback_user->num_rows > 0) : ?>
+                                        <?php while ($feedback = $result_feedback_user->fetch_assoc()) : ?>
+                                            <tr>
+                                                <td><?= $feedback['id_feedback']; ?></td>
+                                                <td><?= $feedback['tanggal_feedback']; ?></td>
+                                                <td><i>
+                                                    <?php 
+                                                    $status_class = '';
+                                                    $status_text = $feedback['nama_kategori'];
+
+                                                    if ($feedback['nama_kategori'] == 'Negatif') {
+                                                        $status_class = 'text-danger';
+                                                    } elseif ($feedback['nama_kategori'] == 'Positif') {
+                                                        $status_class = 'text-success';
+                                                    } elseif ($feedback['nama_kategori'] == 'Saran') {
+                                                        $status_class = 'text-warning';
+                                                    }
+                                                    ?>
+                                                    <span class="<?= $status_class; ?>"><?= $status_text; ?></span>
+                                                </i></td>
+                                                <td><?= $feedback['isi_feedback']; ?></td>
+                                                <td><i>
+                                                    <?php 
+                                                    $status_class = '';
+                                                    $status_text = $feedback['status'];
+
+                                                    if ($feedback['status'] == 'pending') {
+                                                        $status_class = 'text-danger';
+                                                        $status_text = 'Pending';
+                                                    } elseif ($feedback['status'] == 'diproses') {
+                                                        $status_class = 'text-warning';
+                                                        $status_text = 'Diproses';
+                                                    } elseif ($feedback['status'] == 'selesai') {
+                                                        $status_class = 'text-success';
+                                                        $status_text = 'Selesai';
+                                                    }
+                                                    ?>
+                                                    <span class="<?= $status_class; ?>"><?= $status_text; ?></span>
+                                                </i></td>
+                                                <td><?= $feedback['nama_karyawan'] ? $feedback['nama_karyawan'] : '-'; ?></td>
+                                                <td><?= $feedback['balasan'] ? $feedback['balasan'] : '-'; ?></td>
+                                                <td><?= $feedback['tanggal_balasan'] ? $feedback['tanggal_balasan'] : '-'; ?></td>
+                                            </tr>
+                                        <?php endwhile; ?>
+                                    <?php else : ?>
+                                        <tr>
+                                            <td colspan="8" class="text-center">Belum ada feedback yang diajukan.</td>
+                                        </tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
             </div>
+
         </div>
-        <footer class="py-4 bg-light mt-auto">
-            <div class="container-fluid px-4">
-                <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted">Copyright &copy; Kelompok 5 2024</div>
-                </div>
-            </div>
-        </footer>
-    </div> 
+        <div class="side-wallpaper"></div>
+    </div>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"></script>
     <script>
         const datatable = new simpleDatatables.DataTable("#datatablesSimple");

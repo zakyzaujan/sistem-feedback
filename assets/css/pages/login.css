@@ -1,0 +1,24 @@
+body {
+    background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-30px);
+}
+
+.btn-primary {
+    background-color: #0c3483 !important;
+    border-color: #0c3483 !important;
+}
+
+.btn-primary:hover {
+    background-color: #a2b6df !important;
+    border-color: #a2b6df !important;
+}
