@@ -10,7 +10,9 @@ if ($_SESSION['role_user'] !== 'karyawan') {
 if (isset($_GET['id'])) {
     $id_feedback = $_GET['id'];
 
-    $sql_feedback = "SELECT feedback.*, kategori_feedback.nama_kategori, user.nama_user 
+    $sql_feedback = "SELECT feedback.*, 
+                            kategori_feedback.nama_kategori, 
+                            user.nama_user 
                      FROM feedback 
                      INNER JOIN kategori_feedback ON feedback.id_kategori = kategori_feedback.id_kategori 
                      INNER JOIN user ON feedback.id_user = user.id_user
@@ -55,9 +57,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Balas Feedback</title>
+    <title>Balas Feedback - Sistem Feedback | Karyawan</title>
     <link href="assets/css/pages/balas_feedback.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animation{
+            animation: fadeIn 0.3s ease;
+        }
+    </style>
 </head>
 <body class="bg-light">
     <div class="wrapper">
@@ -69,26 +87,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </nav>
 
-            <div class="container mt-5">
+            <div class="container animation mt-5">
                 <h3 class="mb-4 text-center"><i class="fa-solid fa-reply"></i> Balas Feedback</h3>
                 <p class="text-muted text-center">Berikan respons terhadap feedback yang diberikan oleh pengguna.</p>
-                <div class="d-flex justify-content-center align-items-center">
-                    <div class="col-md-8 col-lg-7">
-                        <form method="POST">
-                            <div class="mb-3">
-                                <label for="isi_feedback" class="form-label">Isi Feedback</label>
-                                <textarea class="form-control" id="isi_feedback" rows="4" readonly><?= $feedback['isi_feedback']; ?></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="balasan" class="form-label">Balasan</label>
-                                <textarea class="form-control" id="balasan" name="balasan" rows="4" required></textarea>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-success mt-3"><i class="fa-regular fa-paper-plane"></i>  Kirim Balasan</button>
-                            </div>
-                        </form>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div class="col-md-8 col-lg-7">
+                            <form method="POST">
+                                <div class="mb-3">
+                                    <label for="isi_feedback" class="form-label">Isi Feedback</label>
+                                    <textarea class="form-control" id="isi_feedback" rows="9" readonly><?= $feedback['isi_feedback']; ?></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="balasan" class="form-label">Balasan</label>
+                                    <textarea class="form-control" id="balasan" name="balasan" rows="7" required></textarea>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-success mt-3"><i class="fa-regular fa-paper-plane"></i>  Kirim Balasan</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
             </div>
 
         </div>

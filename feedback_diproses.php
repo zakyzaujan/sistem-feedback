@@ -13,7 +13,9 @@ unset($_SESSION['balasan_dikirim']);
 $feedback_diproses = isset($_SESSION['feedback_diproses']) ? $_SESSION['feedback_diproses'] : null;
 unset($_SESSION['feedback_diproses']);
 
-$sql_feedback = "SELECT feedback.*, kategori_feedback.nama_kategori, user.nama_user 
+$sql_feedback = "SELECT feedback.*, 
+                        kategori_feedback.nama_kategori, 
+                        user.nama_user 
                  FROM feedback 
                  INNER JOIN kategori_feedback ON feedback.id_kategori = kategori_feedback.id_kategori 
                  INNER JOIN user ON feedback.id_user = user.id_user
@@ -30,6 +32,22 @@ $result_feedback = $conn->query($sql_feedback);
     <link href="assets/css/pages/feedback_diproses.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animation{
+            animation: fadeIn 0.3s ease;
+        }
+    </style>
 </head>
 <body class="bg-light">
     <div class="wrapper">
@@ -66,9 +84,9 @@ $result_feedback = $conn->query($sql_feedback);
                 </div>
             </nav>
 
-            <div class="container mt-5">
+            <div class="container animation mt-5">
                 <h3 class="text-center mb-4"><i class="fa-regular fa-folder"></i> List Pemrosesan Feedback</h3>
-                <p class="text-muted text-center">Feedback yang sedang diproses oleh karyawan.</p>
+                <p class="text-muted text-center mb-5">Feedback yang sedang diproses oleh karyawan.</p>
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>

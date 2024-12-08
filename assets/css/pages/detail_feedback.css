@@ -1,0 +1,93 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.wrapper {
+    display: flex;
+    height: 100%;
+}
+
+.pengguna{
+    background-image: linear-gradient(to top, #88d3ce 0%, #6e45e2 100%);
+    width: 10%;
+    min-width: 150px;
+}
+
+.karyawan{
+    background-image: linear-gradient(to top, #6a85b6 0%, #bac8e0 100%);
+    width: 10%;
+    min-width: 150px;
+}
+
+.pemilik{
+    background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
+    background-blend-mode: multiply,multiply;
+    width: 10%;
+    min-width: 150px;
+}
+
+.main-content {
+    flex: 1;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.main-content::-webkit-scrollbar{
+    width: 0px;
+    height: 0px;
+}
+
+.navbar {
+    border-bottom: 2px solid #dee2e6;
+}
+
+.navbar-nav .nav-link {
+    transition: color 0.1s ease, font-weight 0.1s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #313638;
+    font-weight: bold;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #495057;
+}
+
+.info-list {
+    padding-left: 20px;
+}
+
+.info-list li {
+    margin-bottom: 10px;
+}
+
+.info-list strong {
+    color: #343a40;
+}
+
+.feedback-detail, .reply-detail {
+    background-color: #f9f9f9;
+    border-left: 3px solid #007bff;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.reply-detail {
+    border-left-color: #28a745;
+}

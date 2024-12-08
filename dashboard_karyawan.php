@@ -36,6 +36,22 @@ $feedback_selesai = $result_feedback_selesai->fetch_assoc()['selesai'];
     <title>Dashboard Karyawan - Sistem Feedback | Karyawan</title>
     <link href="assets/css/pages/dashboard_karyawan.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animation{
+            animation: fadeIn 0.3s ease;
+        }
+    </style>
 </head>
 <body class="bg-light">
     <div class="wrapper">
@@ -72,6 +88,7 @@ $feedback_selesai = $result_feedback_selesai->fetch_assoc()['selesai'];
                 </div>
             </nav>
 
+        <div class="animation">
             <div class="container mt-5">
                 <div class="hero-section text-white text-center">
                     <h2>Selamat Datang, <b><?= $nama_user ?></b></h2>
@@ -142,6 +159,7 @@ $feedback_selesai = $result_feedback_selesai->fetch_assoc()['selesai'];
                     </div>
                 </div>
             </div>
+        </div>
 
         </div>
         <div class="side-wallpaper"></div>

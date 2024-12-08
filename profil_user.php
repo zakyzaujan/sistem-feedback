@@ -22,6 +22,22 @@ $user = $result_user->fetch_assoc();
     <title>Profil Saya - Sistem Feedback | Pengguna</title>
     <link href="assets/css/pages/profil_user.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animation{
+            animation: fadeIn 0.3s ease;
+        }
+    </style>
 </head>
 <body class="bg-light">
     <div class="wrapper">
@@ -55,9 +71,9 @@ $user = $result_user->fetch_assoc();
                 </div>
             </nav>
 
-            <div class="container mt-5">
+            <div class="container animation mt-5">
                 <h3 class="mb-4 text-center"><i class="fa-regular fa-user"></i> Info Profil Pengguna</h3>
-                <p class="text-muted text-center">Info mengenai akun pengguna sesuai dengan yang didaftarkan.</p>
+                <p class="text-muted text-center mb-5">Info mengenai akun pengguna sesuai dengan yang didaftarkan.</p>
                 <div class="row justify-content-center">
                     <div class="col-md-6">
                         <div class="card p-5">

@@ -20,6 +20,22 @@ $result_kategori = $conn->query("SELECT * FROM kategori_feedback");
     <title>Kirim Feedback</title>
     <link href="assets/css/pages/kirim_feedback.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animation{
+            animation: fadeIn 0.3s ease;
+        }
+    </style>
 </head>
 <body class="bg-light">
     <div class="wrapper">
@@ -53,9 +69,9 @@ $result_kategori = $conn->query("SELECT * FROM kategori_feedback");
                 </div>
             </nav>
 
-            <div class="container mt-5">
+            <div class="container animation mt-5">
                 <h2 class="mb-4 text-center"><i class="fa-regular fa-comment"></i> Kirim Feedback</h2>
-                <p class="text-muted text-center">Kirimkan feedback berupa hal positif, negatif, ataupun saran.</p>
+                <p class="text-muted text-center mb-5">Kirimkan feedback berupa hal positif, negatif, ataupun saran.</p>
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-7">
                         <?php if (isset($_SESSION['feedback_status'])) : ?>
@@ -65,30 +81,32 @@ $result_kategori = $conn->query("SELECT * FROM kategori_feedback");
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         <?php endif; ?>
-                        <form method="POST" action="submit_feedback.php" class="mt-3">
-                            <div class="mb-3">
-                                <label for="isi_feedback" class="form-label">Isi Feedback</label>
-                                <textarea name="isi_feedback" id="isi_feedback" class="form-control" rows="4" required></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="id_kategori" class="form-label">Kategori Feedback</label>
-                                <select name="id_kategori" id="id_kategori" class="form-select" required>
-                                    <option value="">Pilih Kategori</option>
-                                    <?php if ($result_kategori->num_rows > 0) : ?>
-                                        <?php while ($kategori = $result_kategori->fetch_assoc()) : ?>
-                                            <option value="<?= htmlspecialchars($kategori['id_kategori']); ?>">
-                                                <?= htmlspecialchars($kategori['id_kategori']) . ' - ' . htmlspecialchars($kategori['nama_kategori']); ?>
-                                            </option>
-                                        <?php endwhile; ?>
-                                    <?php else : ?>
-                                        <option value="" disabled>Tidak ada kategori tersedia</option>
-                                    <?php endif; ?>
-                                </select>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-success mt-3"><i class="fa-regular fa-paper-plane"></i> Kirim Feedback</button>
-                            </div> 
-                        </form>
+                        <div class="info-card p-4">
+                            <form method="POST" action="submit_feedback.php" class="mt-3">
+                                <div class="mb-3">
+                                    <label for="isi_feedback" class="form-label">Isi Feedback</label>
+                                    <textarea name="isi_feedback" id="isi_feedback" class="form-control" rows="9" required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="id_kategori" class="form-label">Kategori Feedback</label>
+                                    <select name="id_kategori" id="id_kategori" class="form-select" required>
+                                        <option value="">Pilih Kategori</option>
+                                        <?php if ($result_kategori->num_rows > 0) : ?>
+                                            <?php while ($kategori = $result_kategori->fetch_assoc()) : ?>
+                                                <option value="<?= htmlspecialchars($kategori['id_kategori']); ?>">
+                                                    <?= htmlspecialchars($kategori['id_kategori']) . ' - ' . htmlspecialchars($kategori['nama_kategori']); ?>
+                                                </option>
+                                            <?php endwhile; ?>
+                                        <?php else : ?>
+                                            <option value="" disabled>Tidak ada kategori tersedia</option>
+                                        <?php endif; ?>
+                                    </select>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-success mt-3"><i class="fa-regular fa-paper-plane"></i> Kirim Feedback</button>
+                                </div> 
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

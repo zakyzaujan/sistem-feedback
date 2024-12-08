@@ -7,7 +7,9 @@ if ($_SESSION['role_user'] !== 'karyawan') {
     exit;
 }
 
-$sql_log = "SELECT log_aktivitas.*, feedback.isi_feedback, user.nama_user AS nama_pengguna, 
+$sql_log = "SELECT log_aktivitas.*, 
+                   feedback.isi_feedback, 
+                   user.nama_user AS nama_pengguna, 
                    karyawan.nama_user AS nama_karyawan
             FROM log_aktivitas
             INNER JOIN feedback ON log_aktivitas.id_feedback = feedback.id_feedback
@@ -26,6 +28,22 @@ $result_log = $conn->query($sql_log);
     <link href="assets/css/pages/log_aktivitas.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animation{
+            animation: fadeIn 0.3s ease;
+        }
+    </style>
 </head>
 <body class="bg-light">
     <div class="wrapper">
@@ -62,21 +80,21 @@ $result_log = $conn->query($sql_log);
                 </div>
             </nav>
 
-            <div class="container mt-5">
+            <div class="container animation mt-5">
                 <h3 class="text-center mb-4"><i class="fa-regular fa-file"></i> Log Balasan Feedback</h3>
-                <p class="text-muted text-center">Feedback yang selesai diproses oleh karyawan.</p>
+                <p class="text-muted text-center mb-5">Feedback yang selesai diproses oleh karyawan.</p>
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
-                        Tabel Log AKtivitas                            
+                        Tabel Log Aktivitas                            
                     </div>
                     <div class="card-body">
                         <table id="datatablesSimple" class="table table-bordered table-striped" role="table" aria-label="Tabel Feedback Saya">
                             <thead>
                                 <tr>
                                     <th>ID Feedback</th>
-                                    <th>Isi Feedback</th>
                                     <th>Pengguna</th>
+                                    <th>Isi Feedback</th>
                                     <th>Karyawan</th>
                                     <th>Balasan</th>
                                     <th>Tanggal Balasan</th>
@@ -86,11 +104,11 @@ $result_log = $conn->query($sql_log);
                                 <?php if ($result_log->num_rows > 0) : ?>
                                     <?php while ($log = $result_log->fetch_assoc()) : ?>
                                         <tr>
-                                            <td><?= $log['id_feedback']; ?></td>
-                                            <td title="<?= $log['isi_feedback']; ?>"><?= substr($log['isi_feedback'], 0, 250); ?><?= strlen($log['isi_feedback']) > 250 ? '...' : ''; ?></td>
+                                            <td><a href="detail_feedback.php?id_feedback=<?= $log['id_feedback']; ?>"><?= $log['id_feedback']; ?></a></td>
                                             <td><?= isset($log['nama_pengguna']) ? $log['nama_pengguna'] : 'Tidak tersedia'; ?></td>
+                                            <td title="<?= $log['isi_feedback']; ?>"><?= substr($log['isi_feedback'], 0, 45); ?><?= strlen($log['isi_feedback']) > 45 ? '...' : ''; ?></td>
                                             <td><?= isset($log['nama_karyawan']) ? $log['nama_karyawan'] : 'Tidak tersedia'; ?></td>
-                                            <td title="<?= $log['balasan']; ?>"><?= substr($log['balasan'], 0, 250); ?><?= strlen($log['balasan']) > 250 ? '...' : ''; ?></td>
+                                            <td title="<?= $log['balasan']; ?>"><?= substr($log['balasan'], 0, 45); ?><?= strlen($log['balasan']) > 45 ? '...' : ''; ?></td>
                                             <td><?= isset($log['tanggal_balasan']) ? $log['tanggal_balasan'] : 'Tidak tersedia'; ?></td>
                                         </tr>
                                     <?php endwhile; ?>

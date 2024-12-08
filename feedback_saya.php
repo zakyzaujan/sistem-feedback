@@ -31,6 +31,22 @@ $result_feedback_user = $conn->query($sql_feedback_user);
     <link href="assets/css/pages/feedback_saya.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animation{
+            animation: fadeIn 0.3s ease;
+        }
+    </style>
 </head>
 <body class="bg-light">
     <div class="wrapper">
@@ -64,9 +80,9 @@ $result_feedback_user = $conn->query($sql_feedback_user);
                 </div>
             </nav>
 
-            <div class="container mt-5">
+            <div class="container animation mt-5">
                 <h3 class="mb-4 text-center"><i class="fa-regular fa-folder"></i> Feedback Saya</h3>
-                <p class="text-muted text-center">Feedback yang sudah pernah diajukan.</p>
+                <p class="text-muted text-center mb-5">Feedback yang sudah pernah diajukan.</p>
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
@@ -90,7 +106,7 @@ $result_feedback_user = $conn->query($sql_feedback_user);
                                     <?php if ($result_feedback_user->num_rows > 0) : ?>
                                         <?php while ($feedback = $result_feedback_user->fetch_assoc()) : ?>
                                             <tr>
-                                                <td><?= $feedback['id_feedback']; ?></td>
+                                                <td><a href="detail_feedback.php?id_feedback=<?= $feedback['id_feedback']; ?>"><?= $feedback['id_feedback']; ?></a></td>
                                                 <td><?= $feedback['tanggal_feedback']; ?></td>
                                                 <td><i>
                                                     <?php 

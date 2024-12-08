@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <button type="submit" class="btn btn-primary w-100">Daftar</button>
         </form>
-        <p class="mt-3 text-center">Sudah punya akun? <a href="index.php">Login di sini</a></p>
+        <p class="mt-3 text-center">Sudah punya akun? <a href="login.php">Login di sini</a></p>
     </div>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>

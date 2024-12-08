@@ -30,12 +30,29 @@ $feedback_selesai = $result_feedback_selesai->fetch_assoc()['selesai'];
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- background-image: linear-gradient(to top, #6a85b6 0%, #bac8e0 100%); -->
+    <!-- background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
+         background-blend-mode: multiply,multiply; -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Pengguna - Sistem Feedback | Pengguna</title>
     <link href="assets/css/pages/dashboard_user.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animation{
+            animation: fadeIn 0.3s ease;
+        }
+    </style>
 </head>
 <body class="bg-light">
     <div class="wrapper">
@@ -69,6 +86,7 @@ $feedback_selesai = $result_feedback_selesai->fetch_assoc()['selesai'];
                 </div>
             </nav>
 
+        <div class="animation">
             <div class="container mt-5">
                 <div class="hero-section text-white text-center">
                     <h2>Selamat Datang, <b><?= $nama_user ?></b></h2>
@@ -126,6 +144,7 @@ $feedback_selesai = $result_feedback_selesai->fetch_assoc()['selesai'];
                     </div>
                 </div>
             </div>
+        </div>
             
         </div>
         <div class="side-wallpaper"></div>
