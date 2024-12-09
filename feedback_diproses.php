@@ -10,9 +10,6 @@ if ($_SESSION['role_user'] !== 'karyawan') {
 $balasan_dikirim = isset($_SESSION['balasan_dikirim']) ? $_SESSION['balasan_dikirim'] : null;
 unset($_SESSION['balasan_dikirim']);
 
-$feedback_diproses = isset($_SESSION['feedback_diproses']) ? $_SESSION['feedback_diproses'] : null;
-unset($_SESSION['feedback_diproses']);
-
 $sql_feedback = "SELECT feedback.*, 
                         kategori_feedback.nama_kategori, 
                         user.nama_user 
@@ -100,13 +97,6 @@ $result_feedback = $conn->query($sql_feedback);
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         <?php endif; ?>
-                        <!-- Alert Status Feedback Diganti -->
-                        <?php if ($feedback_diproses): ?>
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                <?= htmlspecialchars($feedback_diproses); ?>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        <?php endif; ?>
                         <table id="datatablesSimple" class="table table-bordered table-striped" role="table" aria-label="Tabel Feedback Saya">
                             <thead>
                                 <tr>
@@ -126,7 +116,7 @@ $result_feedback = $conn->query($sql_feedback);
                                             <td><?= $feedback['id_feedback']; ?></td>
                                             <td><?= $feedback['nama_user']; ?></td>
                                             <td><?= $feedback['tanggal_feedback']; ?></td>
-                                            <td><?= $feedback['isi_feedback']; ?></td>
+                                            <td title="<?= $feedback['isi_feedback']; ?>"><?= substr($feedback['isi_feedback'], 0, 50); ?><?= strlen($feedback['isi_feedback']) > 50 ? '...' : ''; ?></td>
                                             <td><i>
                                                 <?php 
                                                 $status_class = '';

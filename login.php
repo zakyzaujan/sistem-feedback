@@ -21,6 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: dashboard_user.php');
         } elseif ($user['role_user'] === 'karyawan') {
             header('Location: dashboard_karyawan.php');
+        } elseif ($user['role_user'] === 'pemilik') {
+            header('Location: dashboard_pemilik.php');
         }
         exit;
     } else {
@@ -41,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="card p-4" style="width: 100%; max-width: 400px;">
         <h2 class="text-center mb-4"><i class="fa-solid fa-right-to-bracket"></i> Login</h2>
-        <p class="text-muted text-center">Dengan akun yang sudah <b>terdaftar.</b></p>
+        <p class="text-muted text-center">Gunakan akun yang sudah <b>terdaftar.</b></p>
         <form method="POST" action="">
             <!-- Alert Sukses -->
             <?php if ($success): ?>

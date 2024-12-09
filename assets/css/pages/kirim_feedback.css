@@ -65,11 +65,6 @@ html, body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.info-card h4 {
-    margin-bottom: 0;
-    color: #0d6efd;
-}
-
 .btn-secondary {
     background-color: #4e73df !important;
     border-color: #4e73df !important;

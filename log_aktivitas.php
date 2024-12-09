@@ -92,24 +92,26 @@ $result_log = $conn->query($sql_log);
                         <table id="datatablesSimple" class="table table-bordered table-striped" role="table" aria-label="Tabel Feedback Saya">
                             <thead>
                                 <tr>
-                                    <th>ID Feedback</th>
-                                    <th>Pengguna</th>
-                                    <th>Isi Feedback</th>
-                                    <th>Karyawan</th>
-                                    <th>Balasan</th>
-                                    <th>Tanggal Balasan</th>
+                                <th>ID</th>
+                                <th>Pengguna</th>
+                                <th>Isi</th>
+                                <th>Karyawan</th>
+                                <th>Balasan</th>
+                                <th>Tanggal Balasan</th>
+                                <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php if ($result_log->num_rows > 0) : ?>
                                     <?php while ($log = $result_log->fetch_assoc()) : ?>
                                         <tr>
-                                            <td><a href="detail_feedback.php?id_feedback=<?= $log['id_feedback']; ?>"><?= $log['id_feedback']; ?></a></td>
+                                            <td><?= isset($log['id_feedback']) ? $log['id_feedback'] : 'Tidak tersedia'; ?></td>
                                             <td><?= isset($log['nama_pengguna']) ? $log['nama_pengguna'] : 'Tidak tersedia'; ?></td>
-                                            <td title="<?= $log['isi_feedback']; ?>"><?= substr($log['isi_feedback'], 0, 45); ?><?= strlen($log['isi_feedback']) > 45 ? '...' : ''; ?></td>
+                                            <td title="<?= $log['isi_feedback']; ?>"><?= substr($log['isi_feedback'], 0, 30); ?><?= strlen($log['isi_feedback']) > 30 ? '...' : ''; ?></td>
                                             <td><?= isset($log['nama_karyawan']) ? $log['nama_karyawan'] : 'Tidak tersedia'; ?></td>
-                                            <td title="<?= $log['balasan']; ?>"><?= substr($log['balasan'], 0, 45); ?><?= strlen($log['balasan']) > 45 ? '...' : ''; ?></td>
+                                            <td title="<?= $log['balasan']; ?>"><?= substr($log['balasan'], 0, 30); ?><?= strlen($log['balasan']) > 30 ? '...' : ''; ?></td>
                                             <td><?= isset($log['tanggal_balasan']) ? $log['tanggal_balasan'] : 'Tidak tersedia'; ?></td>
+                                            <td><a href="detail_feedback.php?id_feedback=<?= $log['id_feedback']; ?>" class="btn btn-primary btn-sm"><i class="fa-solid fa-circle-info"></i> Detail</a></td>
                                         </tr>
                                     <?php endwhile; ?>
                                 <?php else : ?>

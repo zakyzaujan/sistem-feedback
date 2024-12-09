@@ -74,14 +74,14 @@ $result_kategori = $conn->query("SELECT * FROM kategori_feedback");
                 <p class="text-muted text-center mb-5">Kirimkan feedback berupa hal positif, negatif, ataupun saran.</p>
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-7">
-                        <?php if (isset($_SESSION['feedback_status'])) : ?>
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <?= $_SESSION['feedback_status']; ?>
-                                <?php unset($_SESSION['feedback_status']); ?>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        <?php endif; ?>
                         <div class="info-card p-4">
+                            <?php if (isset($_SESSION['feedback_status'])) : ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <?= $_SESSION['feedback_status']; ?>
+                                    <?php unset($_SESSION['feedback_status']); ?>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            <?php endif; ?>
                             <form method="POST" action="submit_feedback.php" class="mt-3">
                                 <div class="mb-3">
                                     <label for="isi_feedback" class="form-label">Isi Feedback</label>

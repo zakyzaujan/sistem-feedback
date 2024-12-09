@@ -92,19 +92,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <p class="text-muted text-center">Berikan respons terhadap feedback yang diberikan oleh pengguna.</p>
                     <div class="d-flex justify-content-center align-items-center">
                         <div class="col-md-8 col-lg-7">
-                            <form method="POST">
-                                <div class="mb-3">
-                                    <label for="isi_feedback" class="form-label">Isi Feedback</label>
-                                    <textarea class="form-control" id="isi_feedback" rows="9" readonly><?= $feedback['isi_feedback']; ?></textarea>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="balasan" class="form-label">Balasan</label>
-                                    <textarea class="form-control" id="balasan" name="balasan" rows="7" required></textarea>
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-success mt-3"><i class="fa-regular fa-paper-plane"></i>  Kirim Balasan</button>
-                                </div>
-                            </form>
+                            <div class="info-card p-4">
+                                <form method="POST">
+                                    <div class="mb-3">
+                                        <label for="isi_feedback" class="form-label">Isi Feedback #<?= $id_feedback; ?></label>
+                                        <textarea class="form-control" id="isi_feedback" rows="9" readonly><?= $feedback['isi_feedback']; ?></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="balasan" class="form-label">Balasan</label>
+                                        <textarea class="form-control" id="balasan" name="balasan" rows="7" required></textarea>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-success mt-3"><i class="fa-regular fa-paper-plane"></i>  Kirim Balasan</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
             </div>
