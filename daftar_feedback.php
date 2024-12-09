@@ -16,7 +16,9 @@ $sql_feedback = "SELECT feedback.*,
                  FROM feedback 
                  INNER JOIN kategori_feedback ON feedback.id_kategori = kategori_feedback.id_kategori 
                  INNER JOIN user ON feedback.id_user = user.id_user
-                 WHERE feedback.status = 'pending'";
+                 WHERE feedback.status = 'pending'
+                ORDER BY feedback.tanggal_feedback ASC";
+
 $result_feedback = $conn->query($sql_feedback);
 ?>
 
@@ -101,8 +103,8 @@ $result_feedback = $conn->query($sql_feedback);
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Nama Pengguna</th>
-                                    <th>Tanggal</th>
+                                    <th>Tanggal Diajukan</th>
+                                    <th>Pengguna</th>
                                     <th>Isi Feedback</th>
                                     <th>Kategori</th>
                                     <th>Status</th>
@@ -114,9 +116,9 @@ $result_feedback = $conn->query($sql_feedback);
                                 <?php while ($feedback = $result_feedback->fetch_assoc()) : ?>
                                     <tr>
                                         <td><?= $feedback['id_feedback']; ?></td>
-                                        <td><?= $feedback['nama_user']; ?></td>
                                         <td><?= $feedback['tanggal_feedback']; ?></td>
-                                        <td title="<?= $feedback['isi_feedback']; ?>"><?= substr($feedback['isi_feedback'], 0, 55); ?><?= strlen($feedback['isi_feedback']) > 55 ? '...' : ''; ?></td>
+                                        <td><?= $feedback['nama_user']; ?></td>
+                                        <td title="<?= $feedback['isi_feedback']; ?>"><?= substr($feedback['isi_feedback'], 0, 50); ?><?= strlen($feedback['isi_feedback']) > 50 ? '...' : ''; ?></td>
                                         <td><i>
                                             <?php 
                                             $status_class = '';

@@ -11,10 +11,13 @@ if ($_SESSION['role_user'] !== 'karyawan') {
 
 $sql_log = "SELECT log_aktivitas.*, 
                    feedback.isi_feedback, 
+                   feedback.id_kategori, 
+                   kategori_feedback.nama_kategori, 
                    user.nama_user AS nama_pengguna, 
                    karyawan.nama_user AS nama_karyawan
             FROM log_aktivitas
             INNER JOIN feedback ON log_aktivitas.id_feedback = feedback.id_feedback
+            INNER JOIN kategori_feedback ON feedback.id_kategori = kategori_feedback.id_kategori
             INNER JOIN user ON feedback.id_user = user.id_user
             INNER JOIN user AS karyawan ON log_aktivitas.id_karyawan = karyawan.id_user
             WHERE log_aktivitas.id_karyawan = ?
@@ -94,17 +97,18 @@ $result_log = $stmt->get_result();
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
-                        Tabel Log Aktivitas                            
+                        Tabel Log Balasan                            
                     </div>
                     <div class="card-body">
                         <table id="datatablesSimple" class="table table-bordered table-striped" role="table" aria-label="Tabel Feedback Saya">
                             <thead>
                                 <tr>
                                 <th>ID</th>
-                                <th>Pengguna</th>
-                                <th>Isi</th>
-                                <th>Balasan</th>
                                 <th>Tanggal Balasan</th>
+                                <th>Pengguna</th>
+                                <th>Isi Feedback</th>
+                                <th>Balasan Feedback</th>
+                                <th>Kategori</th>
                                 <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -113,10 +117,25 @@ $result_log = $stmt->get_result();
                                     <?php while ($log = $result_log->fetch_assoc()) : ?>
                                         <tr>
                                             <td><?= isset($log['id_feedback']) ? $log['id_feedback'] : 'Tidak tersedia'; ?></td>
-                                            <td><?= isset($log['nama_pengguna']) ? $log['nama_pengguna'] : 'Tidak tersedia'; ?></td>
-                                            <td title="<?= $log['isi_feedback']; ?>"><?= substr($log['isi_feedback'], 0, 35); ?><?= strlen($log['isi_feedback']) > 35 ? '...' : ''; ?></td>
-                                            <td title="<?= $log['balasan']; ?>"><?= substr($log['balasan'], 0, 35); ?><?= strlen($log['balasan']) > 35 ? '...' : ''; ?></td>
                                             <td><?= isset($log['tanggal_balasan']) ? $log['tanggal_balasan'] : 'Tidak tersedia'; ?></td>
+                                            <td><?= isset($log['nama_pengguna']) ? $log['nama_pengguna'] : 'Tidak tersedia'; ?></td>
+                                            <td title="<?= $log['isi_feedback']; ?>"><?= substr($log['isi_feedback'], 0, 30); ?><?= strlen($log['isi_feedback']) > 30 ? '...' : ''; ?></td>
+                                            <td title="<?= $log['balasan']; ?>"><?= substr($log['balasan'], 0, 30); ?><?= strlen($log['balasan']) > 30 ? '...' : ''; ?></td>  
+                                            <td><i>
+                                                <?php 
+                                                $status_class = '';
+                                                $status_text = $log['nama_kategori'];
+
+                                                if ($log['nama_kategori'] == 'Negatif') {
+                                                    $status_class = 'text-danger';
+                                                } elseif ($log['nama_kategori'] == 'Positif') {
+                                                    $status_class = 'text-success';
+                                                } elseif ($log['nama_kategori'] == 'Saran') {
+                                                    $status_class = 'text-primary';
+                                                }
+                                                ?>
+                                                <span class="<?= $status_class; ?>"><?= $status_text; ?></span>
+                                            </i></td>
                                             <td><a href="detail_feedback.php?id_feedback=<?= $log['id_feedback']; ?>" class="btn btn-primary btn-sm"><i class="fa-solid fa-circle-info"></i> Detail</a></td>
                                         </tr>
                                     <?php endwhile; ?>

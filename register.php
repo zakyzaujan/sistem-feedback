@@ -17,8 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($password !== $confirm_password) {
             $error = "Password dan Konfirmasi Password tidak sama!";
         } else {
-            $sql = "INSERT INTO user (nama_user, email_user, password_user, role_user) 
-                    VALUES ('$nama', '$email', '$password', 'pengguna')";
+            $sql = "INSERT INTO user (nama_user, email_user, password_user, role_user, status_akun, tanggal_bergabung) 
+                    VALUES ('$nama', '$email', '$password', 'pengguna','aktif',NOW())";
             if ($conn->query($sql)) {
                 $_SESSION['success'] = "Registrasi berhasil! Silakan login.";
                 header('Location: login.php');

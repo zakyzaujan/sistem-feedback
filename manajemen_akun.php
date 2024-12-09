@@ -260,6 +260,13 @@ $result_users = $conn->query($query_users);
                                 <option value="pengguna">3 - Pengguna</option>
                             </select>
                         </div>
+                        <div class="mb-3">
+                            <label for="edit_status_akun" class="form-label">Role</label>
+                            <select class="form-select" id="edit_status_akun" name="edit_status_akun">
+                                <option value="aktif">1 - Aktif</option>
+                                <option value="tidak aktif">2 - Tidak Aktif</option>
+                            </select>
+                        </div>
                         <button type="submit" class="btn btn-warning mt-2 mb-2">
                             <i class="fa-regular fa-pen-to-square"></i> Update Akun
                         </button>
@@ -305,16 +312,19 @@ $result_users = $conn->query($query_users);
             const nama = button.getAttribute('data-nama');
             const email = button.getAttribute('data-email');
             const role = button.getAttribute('data-role');
+            const status = button.getAttribute('data-status');
 
             const inputUserId = editUserModal.querySelector('#edit_user_id');
             const inputNama = editUserModal.querySelector('#edit_nama_user');
             const inputEmail = editUserModal.querySelector('#edit_email_user');
             const selectRole = editUserModal.querySelector('#edit_role_user');
+            const selectStatus = editUserModal.querySelector('#edit_status_akun');
 
             inputUserId.value = userId;
             inputNama.value = nama;
             inputEmail.value = email;
             selectRole.value = role;
+            selectStatus.value = status;
         });
     </script>
     <script>

@@ -95,11 +95,10 @@ $result_feedback_user = $conn->query($sql_feedback_user);
                                         <th>ID</th>
                                         <th>Tanggal</th>
                                         <th>Kategori</th>
-                                        <th>Isi</th>
+                                        <th>Isi Feedback</th>
                                         <th>Status</th>
-                                        <th>Nama Karyawan</th>
-                                        <th>Balasan</th>
                                         <th>Tanggal Balasan</th>
+                                        <th>Balasan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -124,7 +123,7 @@ $result_feedback_user = $conn->query($sql_feedback_user);
                                                     ?>
                                                     <span class="<?= $status_class; ?>"><?= $status_text; ?></span>
                                                 </i></td>
-                                                <td title="<?= $feedback['isi_feedback']; ?>"><?= substr($feedback['isi_feedback'], 0, 12); ?><?= strlen($feedback['isi_feedback']) > 12 ? '...' : ''; ?></td>
+                                                <td title="<?= $feedback['isi_feedback']; ?>"><?= substr($feedback['isi_feedback'], 0, 20); ?><?= strlen($feedback['isi_feedback']) > 20 ? '...' : ''; ?></td>
                                                 <td><i>
                                                     <?php 
                                                     $status_class = '';
@@ -143,9 +142,10 @@ $result_feedback_user = $conn->query($sql_feedback_user);
                                                     ?>
                                                     <span class="<?= $status_class; ?>"><?= $status_text; ?></span>
                                                 </i></td>
-                                                <td><?= $feedback['nama_karyawan'] ? $feedback['nama_karyawan'] : '-'; ?></td>
-                                                <td title="<?= $feedback['balasan']; ?>"><?= substr($feedback['balasan'], 0, 12); ?><?= strlen($feedback['balasan']) > 12 ? '...' : ''; ?></td>
                                                 <td><?= $feedback['tanggal_balasan'] ? $feedback['tanggal_balasan'] : '-'; ?></td>
+                                                <td title="<?= !empty($feedback['balasan']) ? $feedback['balasan'] : 'Tidak ada balasan'; ?>">
+                                                    <?= !empty($feedback['balasan']) ? substr($feedback['balasan'], 0, 20) . (strlen($feedback['balasan']) > 20 ? '...' : '') : '-'; ?>
+                                                </td>
                                                 <td><a href="detail_feedback.php?id_feedback=<?= $feedback['id_feedback']; ?>" class="btn btn-primary btn-sm"><i class="fa-solid fa-circle-info"></i> Detail</a></td>
                                             </tr>
                                         <?php endwhile; ?>

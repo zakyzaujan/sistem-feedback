@@ -93,7 +93,7 @@ if (isset($_GET['id_feedback'])) {
                             <div class="feedback-detail">
                                 <h5 class="section-title">Informasi Feedback:</h5>
                                 <ul class="info-list">
-                                    <li><strong>Pengguna:</strong> <?= htmlspecialchars($feedback['nama_pengguna']); ?></li>
+                                    <li><strong>Pengguna:</strong> <span class="text-primary"><?= htmlspecialchars($feedback['nama_pengguna']); ?></span></li>
                                     <li><strong>Tanggal Kirim:</strong> <?= htmlspecialchars($feedback['tanggal_feedback']); ?></li>
                                     <li><strong>Tipe Feedback:</strong> 
                                         <?php
@@ -105,7 +105,7 @@ if (isset($_GET['id_feedback'])) {
                                         } elseif ($feedback['nama_kategori'] == 'Positif') {
                                             $status_class = 'text-success';
                                         } elseif ($feedback['nama_kategori'] == 'Saran') {
-                                            $status_class = 'text-warning';
+                                            $status_class = 'text-primary';
                                         }
                                         ?>
                                         <span class="<?= $status_class; ?>"><?= $status_text; ?></span>
@@ -119,7 +119,7 @@ if (isset($_GET['id_feedback'])) {
                                 <h5 class="section-title">Balasan:</h5>
                                 <?php if ($feedback['balasan']) : ?>
                                     <ul class="info-list">
-                                        <li><strong>Karyawan:</strong> <?= htmlspecialchars($feedback['nama_karyawan']); ?></li>
+                                        <li><strong>Karyawan:</strong> <span class="text-success"><?= htmlspecialchars($feedback['nama_karyawan']); ?></span></li>
                                         <li><strong>Tanggal Balasan:</strong> <?= htmlspecialchars($feedback['tanggal_balasan']); ?></li>
                                         <li><strong>Isi Balasan:</strong> <?= nl2br(htmlspecialchars($feedback['balasan'])); ?></li>
                                     </ul>

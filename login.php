@@ -9,22 +9,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nama_user = $_POST['nama_user'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM user WHERE nama_user = '$nama_user' AND password_user = '$password'";
-    $result = $conn->query($sql);
+    $sql = "SELECT * FROM user WHERE nama_user = ? AND password_user = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $nama_user, $password);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        $_SESSION['id_user'] = $user['id_user'];
-        $_SESSION['role_user'] = $user['role_user'];
 
-        if ($user['role_user'] === 'pengguna') {
-            header('Location: dashboard_user.php');
-        } elseif ($user['role_user'] === 'karyawan') {
-            header('Location: dashboard_karyawan.php');
-        } elseif ($user['role_user'] === 'admin') {
-            header('Location: dashboard_admin.php');
+        if ($user['status_akun'] === 'aktif') {
+            $_SESSION['id_user'] = $user['id_user'];
+            $_SESSION['role_user'] = $user['role_user'];
+
+            if ($user['role_user'] === 'pengguna') {
+                header('Location: dashboard_user.php');
+            } elseif ($user['role_user'] === 'karyawan') {
+                header('Location: dashboard_karyawan.php');
+            } elseif ($user['role_user'] === 'admin') {
+                header('Location: dashboard_admin.php');
+            }
+            exit;
+        } else {
+            $error = "Maaf, akun Anda sudah tidak aktif!";
         }
-        exit;
     } else {
         $error = "Nama atau password tidak sesuai!";
     }
@@ -58,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?= htmlspecialchars($error); ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
+                <?php unset($error); ?>
             <?php endif; ?>
             <div class="mb-3">
                 <label for="nama_user" class="form-label">Nama</label>

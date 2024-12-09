@@ -102,7 +102,7 @@ $feedback_selesai = $result_feedback_selesai->fetch_assoc()['selesai'];
                         <div class="col-md-4">
                             <div class="card text-white bg-primary mb-3">
                                 <div class="card-body text-center">
-                                    <h5 class="card-title">Jumlah Pengguna</h5>
+                                    <h5 class="card-title">Total Akun pada Sistem ini</h5>
                                     <p class="card-text fs-4"><b><?= $total_users ?></b></p>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@ $feedback_selesai = $result_feedback_selesai->fetch_assoc()['selesai'];
                         <div class="col-md-4">
                             <div class="card text-white bg-success mb-3">
                                 <div class="card-body text-center">
-                                    <h5 class="card-title">Jumlah Feedback</h5>
+                                    <h5 class="card-title">Total Feedback Diberikan Pengguna</h5>
                                     <p class="card-text fs-4"><b><?= $total_feedback ?></b></p>
                                 </div>
                             </div>

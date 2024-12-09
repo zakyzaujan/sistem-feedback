@@ -22,7 +22,7 @@ $query_feedback_diproses = "SELECT COUNT(*) AS diproses FROM feedback WHERE stat
 $result_feedback_diproses = $conn->query($query_feedback_diproses);
 $feedback_diproses = $result_feedback_diproses->fetch_assoc()['diproses'];
 
-$query_feedback_selesai = "SELECT COUNT(*) AS selesai FROM feedback WHERE status = 'selesai'";
+$query_feedback_selesai = "SELECT COUNT(*) AS selesai FROM log_aktivitas WHERE id_karyawan = $id_user";
 $result_feedback_selesai = $conn->query($query_feedback_selesai);
 $feedback_selesai = $result_feedback_selesai->fetch_assoc()['selesai'];
 
@@ -66,7 +66,7 @@ $feedback_selesai = $result_feedback_selesai->fetch_assoc()['selesai'];
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item me-2">
-                                <a class="nav-link" href="daftar_feedback.php"><i class="fa-regular fa-comment"></i> Daftar Feedback</a>
+                                <a class="nav-link" href="daftar_feedback.php"><i class="fa-regular fa-comment"></i> Antrian Feedback</a>
                             </li>
                             <li class="nav-item me-2">
                                 <a class="nav-link" href="feedback_diproses.php"><i class="fa-regular fa-folder"></i> Feedback Diproses</a>
@@ -113,7 +113,7 @@ $feedback_selesai = $result_feedback_selesai->fetch_assoc()['selesai'];
                     <div class="col-md-4">
                         <div class="card text-white bg-warning mb-3">
                             <div class="card-body text-center">
-                                <h5 class="card-title">Feedback Sedang Diproses</h5>
+                                <h5 class="card-title">Feedback Diproses Akun Ini</h5>
                                 <p class="card-text fs-4"><b><?= $feedback_diproses ?></b></p>
                             </div>
                         </div>
@@ -123,7 +123,7 @@ $feedback_selesai = $result_feedback_selesai->fetch_assoc()['selesai'];
                     <div class="col-md-4">
                         <div class="card text-white bg-success mb-3">
                             <div class="card-body text-center">
-                                <h5 class="card-title">Feedback Selesai</h5>
+                                <h5 class="card-title">Feedback Terselesaikan Akun Ini</h5>
                                 <p class="card-text fs-4"><b><?= $feedback_selesai ?></b></p>
                             </div>
                         </div>

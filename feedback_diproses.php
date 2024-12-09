@@ -103,8 +103,8 @@ $result_feedback = $conn->query($sql_feedback);
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Tanggal</th>
-                                    <th>Nama Pengguna</th>
+                                    <th>Tanggal Diajukan</th>
+                                    <th>Pengguna</th>
                                     <th>Isi Feedback</th>
                                     <th>Kategori</th>
                                     <th>Status</th>
