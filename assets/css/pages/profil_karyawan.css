@@ -52,18 +52,6 @@ html, body {
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.info-card {
-    border-left: 4px solid #0d6efd;
-    background: #f8f9fa;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.info-card h4 {
-    margin-bottom: 0;
-    color: #0d6efd;
-}
 
 .btn-secondary {
     background-color: #7a99d3 !important;

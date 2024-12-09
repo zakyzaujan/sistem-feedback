@@ -65,7 +65,7 @@ $result_feedback = $conn->query($sql_feedback);
                                 <a class="nav-link" href="feedback_diproses.php"><i class="fa-regular fa-folder"></i> Feedback Diproses</a>
                             </li>
                             <li class="nav-item me-2">
-                                <a class="nav-link" href="log_aktivitas.php"><i class="fa-regular fa-file"></i> Log Aktivitas</a>
+                                <a class="nav-link" href="log_aktivitas.php"><i class="fa-regular fa-file"></i> Log Balasan</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-secondary" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

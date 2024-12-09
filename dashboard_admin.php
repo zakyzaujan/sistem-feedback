@@ -35,7 +35,7 @@ $feedback_selesai = $result_feedback_selesai->fetch_assoc()['selesai'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Admin - Sistem Feedback</title>
+    <title>Dashboard Admin - Sistem Feedback | Admin</title>
     <link href="assets/css/pages/dashboard_admin.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -61,20 +61,17 @@ $feedback_selesai = $result_feedback_selesai->fetch_assoc()['selesai'];
         <div class="main-content">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container">
-                    <a class="navbar-brand fw-bold" href="dashboard_admin.php"><i class="fa-solid fa-house"></i> Sistem Feedback | Admin</a>
+                    <a class="navbar-brand fw-bold" href="dashboard_admin.php" id="judul"><i class="fa-solid fa-house"></i> Sistem Feedback | Admin</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item me-2">
-                                <a class="nav-link" href="manage_users.php"><i class="fa-regular fa-user"></i> Manajemen Pengguna</a>
+                                <a class="nav-link" href="manajemen_akun.php"><i class="fa-solid fa-list-check"></i> Manajemen Akun</a>
                             </li>
                             <li class="nav-item me-2">
-                                <a class="nav-link" href="feedback_list.php"><i class="fa-regular fa-comment"></i> Daftar Feedback</a>
-                            </li>
-                            <li class="nav-item me-2">
-                                <a class="nav-link" href="settings.php"><i class="fa-solid fa-cog"></i> Pengaturan</a>
+                                <a class="nav-link" href="semua_feedback.php"><i class="fa-regular fa-folder"></i> Log Feedback</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-secondary" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -113,7 +110,7 @@ $feedback_selesai = $result_feedback_selesai->fetch_assoc()['selesai'];
 
                         <!-- Jumlah Feedback -->
                         <div class="col-md-4">
-                            <div class="card text-white bg-warning mb-3">
+                            <div class="card text-white bg-success mb-3">
                                 <div class="card-body text-center">
                                     <h5 class="card-title">Jumlah Feedback</h5>
                                     <p class="card-text fs-4"><b><?= $total_feedback ?></b></p>
@@ -124,29 +121,21 @@ $feedback_selesai = $result_feedback_selesai->fetch_assoc()['selesai'];
                 </div>
 
                 <div class="container mt-5">
-                    <div class="row text-center">
+                    <div class="row text-center justify-content-center">
                         <div class="col-md-4">
                             <div class="info-card p-4 bg-light">
-                                <img src="assets/icons/users.png" alt="Manajemen Pengguna">
-                                <h5 class="mt-3">Manajemen Pengguna</h5>
-                                <p>Kelola semua data pengguna sistem.</p>
-                                <a href="manage_users.php" class="btn btn-primary">Lihat</a>
+                                <img src="assets/icons/user_management.png" alt="Manajemen Akun">
+                                <h5 class="mt-3">Manajemen Akun</h5>
+                                <p>Kelola semua data akun pengguna sistem.</p>
+                                <a href="manajemen_akun.php" class="btn btn-primary">Lihat</a>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="info-card p-4 bg-light">
-                                <img src="assets/icons/feedback.png" alt="Daftar Feedback">
+                                <img src="assets/icons/daftar_feedback.png" alt="Daftar Feedback">
                                 <h5 class="mt-3">Daftar Feedback</h5>
                                 <p>Kelola semua feedback yang masuk.</p>
                                 <a href="feedback_list.php" class="btn btn-primary">Lihat</a>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="info-card p-4 bg-light">
-                                <img src="assets/icons/settings.png" alt="Pengaturan">
-                                <h5 class="mt-3">Pengaturan</h5>
-                                <p>Kelola pengaturan sistem.</p>
-                                <a href="settings.php" class="btn btn-primary">Lihat</a>
                             </div>
                         </div>
                     </div>

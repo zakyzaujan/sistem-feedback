@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     VALUES ('$nama', '$email', '$password', 'pengguna')";
             if ($conn->query($sql)) {
                 $_SESSION['success'] = "Registrasi berhasil! Silakan login.";
-                header('Location: index.php');
+                header('Location: login.php');
                 exit;
             } else {
                 $error = "Registrasi gagal!";

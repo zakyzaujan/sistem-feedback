@@ -19,6 +19,7 @@ html, body {
     flex: 1;
     background: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 100%;
     overflow-y: scroll;
 }
 
@@ -31,6 +32,10 @@ html, body {
     border-bottom: 2px solid #dee2e6;
 }
 
+.navbar-nav .nav-link {
+    transition: color 0.1s ease, font-weight 0.1s ease;
+}
+
 .navbar-nav .nav-link:hover {
     color: #596164;
     font-weight: bold;
@@ -41,35 +46,18 @@ html, body {
     font-weight: bold;
 }
 
-#judul {
-    color: #596164;
-    font-weight: bold;
+.dashboard-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
-.hero-section {
-    background-image: linear-gradient(to right, #d7d2cc 0%, #304352 100%);
-    color: white;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    padding: 40px 20px;
-    margin-bottom: 30px;
-}
-
 .info-card {
-    border: none;
-    transition: transform 0.3s, box-shadow 0.3s;
-    text-align: center;
-}
-
-.info-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.info-card img {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 15px;
+    border-left: 4px solid #0d6efd;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .btn-secondary {

@@ -16,7 +16,9 @@ $sql_feedback = "SELECT feedback.*,
                  FROM feedback 
                  INNER JOIN kategori_feedback ON feedback.id_kategori = kategori_feedback.id_kategori 
                  INNER JOIN user ON feedback.id_user = user.id_user
-                 WHERE feedback.status = 'diproses'";
+                 WHERE feedback.status = 'diproses'
+                 ORDER BY feedback.tanggal_feedback ASC";
+
 $result_feedback = $conn->query($sql_feedback);
 ?>
 
@@ -65,7 +67,7 @@ $result_feedback = $conn->query($sql_feedback);
                                 <a class="nav-link fw-bold" href="feedback_diproses.php"><i class="fa-regular fa-folder"></i> Feedback Diproses</a>
                             </li>
                             <li class="nav-item me-2">
-                                <a class="nav-link" href="log_aktivitas.php"><i class="fa-regular fa-file"></i> Log Aktivitas</a>
+                                <a class="nav-link" href="log_aktivitas.php"><i class="fa-regular fa-file"></i> Log Balasan</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-secondary" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -101,8 +103,8 @@ $result_feedback = $conn->query($sql_feedback);
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Nama Pengguna</th>
                                     <th>Tanggal</th>
+                                    <th>Nama Pengguna</th>
                                     <th>Isi Feedback</th>
                                     <th>Kategori</th>
                                     <th>Status</th>
@@ -114,8 +116,8 @@ $result_feedback = $conn->query($sql_feedback);
                                     <?php while ($feedback = $result_feedback->fetch_assoc()) : ?>
                                         <tr>
                                             <td><?= $feedback['id_feedback']; ?></td>
-                                            <td><?= $feedback['nama_user']; ?></td>
                                             <td><?= $feedback['tanggal_feedback']; ?></td>
+                                            <td><?= $feedback['nama_user']; ?></td>
                                             <td title="<?= $feedback['isi_feedback']; ?>"><?= substr($feedback['isi_feedback'], 0, 50); ?><?= strlen($feedback['isi_feedback']) > 50 ? '...' : ''; ?></td>
                                             <td><i>
                                                 <?php 
@@ -127,7 +129,7 @@ $result_feedback = $conn->query($sql_feedback);
                                                 } elseif ($feedback['nama_kategori'] == 'Positif') {
                                                     $status_class = 'text-success';
                                                 } elseif ($feedback['nama_kategori'] == 'Saran') {
-                                                    $status_class = 'text-warning';
+                                                    $status_class = 'text-primary';
                                                 }
                                                 ?>
                                                 <span class="<?= $status_class; ?>"><?= $status_text; ?></span>
