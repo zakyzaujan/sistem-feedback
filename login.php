@@ -21,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: dashboard_user.php');
         } elseif ($user['role_user'] === 'karyawan') {
             header('Location: dashboard_karyawan.php');
-        } elseif ($user['role_user'] === 'pemilik') {
-            header('Location: dashboard_pemilik.php');
+        } elseif ($user['role_user'] === 'admin') {
+            header('Location: dashboard_admin.php');
         }
         exit;
     } else {

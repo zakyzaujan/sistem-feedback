@@ -1,0 +1,83 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.wrapper {
+    display: flex;
+    height: 100%;
+}
+
+.side-wallpaper {
+    background-image: linear-gradient(to right, #868f96 0%, #596164 100%);
+    width: 10%;
+    min-width: 150px;
+}
+
+.main-content {
+    flex: 1;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: scroll;
+}
+
+.main-content::-webkit-scrollbar{
+    width: 0px;
+    height: 0px;
+}
+
+.navbar {
+    border-bottom: 2px solid #dee2e6;
+}
+
+.navbar-nav .nav-link {
+    transition: color 0.1s ease, font-weight 0.1s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #5b719b;
+    font-weight: bold;
+}
+
+#judul {
+    color: #5b719b;
+    font-weight: bold;
+}
+
+.hero-section {
+    background-image: linear-gradient(to right, #d7d2cc 0%, #304352 100%);
+    color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    padding: 40px 20px;
+    margin-bottom: 30px;
+}
+
+.info-card {
+    border: none;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+}
+
+.info-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.info-card img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+}
+
+.btn-secondary {
+    background-color: #7a99d3 !important;
+    border-color:  #7a99d3 !important;
+    color: white !important;
+}
+
+.btn-secondary:hover {
+    background-color: #6a85b6 !important;
+    border-color: #6a85b6 !important;
+}
