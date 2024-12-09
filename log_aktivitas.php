@@ -4,6 +4,11 @@ include 'config.php';
 
 $id_karyawan_login = $_SESSION['id_user'];
 
+$sql_user = "SELECT nama_user FROM user WHERE id_user = '$id_karyawan_login'";
+$result_user = $conn->query($sql_user);
+$user = $result_user->fetch_assoc();
+$nama_user = $user['nama_user'];
+
 if ($_SESSION['role_user'] !== 'karyawan') {
     header('Location: index.php');
     exit;
@@ -62,7 +67,7 @@ $result_log = $stmt->get_result();
         <div class="main-content">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container">
-                    <a class="navbar-brand" href="dashboard_karyawan.php" id="judul"><i class="fa-solid fa-house"></i> Sistem Feedback | Karyawan</a>
+                    <a class="navbar-brand" href="dashboard_karyawan.php" id="judul"><i class="fa-solid fa-house"></i> Sistem Feedback | <?=$nama_user;?></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -104,7 +109,7 @@ $result_log = $stmt->get_result();
                             <thead>
                                 <tr>
                                 <th>ID</th>
-                                <th>Tanggal Balasan</th>
+                                <th>Tanggal Dibalas</th>
                                 <th>Pengguna</th>
                                 <th>Isi Feedback</th>
                                 <th>Balasan Feedback</th>
@@ -141,7 +146,7 @@ $result_log = $stmt->get_result();
                                     <?php endwhile; ?>
                                 <?php else : ?>
                                     <tr>
-                                        <td colspan="6" class="text-center">Belum ada log aktivitas yang tersedia.</td>
+                                        <td colspan="7" class="text-center">Belum ada log aktivitas yang tersedia.</td>
                                     </tr>
                                 <?php endif; ?>
                             </tbody>

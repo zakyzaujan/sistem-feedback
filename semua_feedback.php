@@ -8,16 +8,26 @@ if ($_SESSION['role_user'] !== 'admin') {
     exit;
 }
 
-$sql_log = "SELECT log_aktivitas.*, 
-                   feedback.isi_feedback, 
-                   user.nama_user AS nama_pengguna, 
-                   karyawan.nama_user AS nama_karyawan
-            FROM log_aktivitas
-            INNER JOIN feedback ON log_aktivitas.id_feedback = feedback.id_feedback
-            INNER JOIN user ON feedback.id_user = user.id_user
-            INNER JOIN user AS karyawan ON log_aktivitas.id_karyawan = karyawan.id_user
-            ORDER BY log_aktivitas.tanggal_balasan DESC";
-$result_log = $conn->query($sql_log);
+$id_user = $_SESSION['id_user'];
+$sql_user = "SELECT nama_user FROM user WHERE id_user = '$id_user'";
+$result_user = $conn->query($sql_user);
+$user = $result_user->fetch_assoc();
+$nama_user = $user['nama_user'];
+
+// Query untuk menghitung total feedback
+$query_total_feedback = "SELECT COUNT(*) AS total_feedback FROM feedback";
+$result_total_feedback = $conn->query($query_total_feedback);
+$total_feedback = $result_total_feedback->fetch_assoc()['total_feedback'];
+
+// Query untuk menampilkan data dari tabel feedback
+$sql_feedback = "SELECT feedback.*, 
+                        user.nama_user AS nama_pengguna,
+                        kategori_feedback.nama_kategori 
+                 FROM feedback 
+                 INNER JOIN user ON feedback.id_user = user.id_user
+                 INNER JOIN kategori_feedback ON feedback.id_kategori = kategori_feedback.id_kategori
+                 ORDER BY feedback.tanggal_feedback ASC";
+$result_feedback = $conn->query($sql_feedback);
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +62,7 @@ $result_log = $conn->query($sql_log);
         <div class="main-content">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container">
-                    <a class="navbar-brand" href="dashboard_admin.php" id="judul"><i class="fa-solid fa-house"></i> Sistem Feedback | Admin</a>
+                    <a class="navbar-brand" href="dashboard_admin.php" id="judul"><i class="fa-solid fa-house"></i> Sistem Feedback | <?=$nama_user;?></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -80,41 +90,72 @@ $result_log = $conn->query($sql_log);
 
             <div class="container animation mt-5">
                 <h3 class="text-center mb-4"><i class="fa-regular fa-folder"></i> Log Feedback</h3>
-                <p class="text-muted text-center mb-5">Berisikan semua feedback yang telah diproses oleh karyawan.</p>
+                <p class="text-muted text-center mb-5">Berisi semua feedback yang pernah diajukan oleh pengguna.</p>
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
-                        Tabel Log Aktivitas                            
+                        Tabel Log Feedback
                     </div>
                     <div class="card-body">
                         <table id="datatablesSimple" class="table table-bordered table-striped" role="table" aria-label="Tabel Feedback Saya">
                             <thead>
                                 <tr>
-                                <th>ID</th>
-                                <th>Pengguna</th>
-                                <th>Isi</th>
-                                <th>Karyawan</th>
-                                <th>Balasan</th>
-                                <th>Tanggal Balasan</th>
-                                <th>Aksi</th>
+                                    <th>ID</th>
+                                    <th>Tanggal</th>
+                                    <th>Status</th>
+                                    <th>Pengguna</th>
+                                    <th>Kategori</th>
+                                    <th>Isi Feedback</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if ($result_log->num_rows > 0) : ?>
-                                    <?php while ($log = $result_log->fetch_assoc()) : ?>
+                                <?php if ($result_feedback->num_rows > 0) : ?>
+                                    <?php while ($feedback = $result_feedback->fetch_assoc()) : ?>
                                         <tr>
-                                            <td><?= isset($log['id_feedback']) ? $log['id_feedback'] : 'Tidak tersedia'; ?></td>
-                                            <td><?= isset($log['nama_pengguna']) ? $log['nama_pengguna'] : 'Tidak tersedia'; ?></td>
-                                            <td title="<?= $log['isi_feedback']; ?>"><?= substr($log['isi_feedback'], 0, 30); ?><?= strlen($log['isi_feedback']) > 30 ? '...' : ''; ?></td>
-                                            <td><?= isset($log['nama_karyawan']) ? $log['nama_karyawan'] : 'Tidak tersedia'; ?></td>
-                                            <td title="<?= $log['balasan']; ?>"><?= substr($log['balasan'], 0, 30); ?><?= strlen($log['balasan']) > 30 ? '...' : ''; ?></td>
-                                            <td><?= isset($log['tanggal_balasan']) ? $log['tanggal_balasan'] : 'Tidak tersedia'; ?></td>
-                                            <td><a href="detail_feedback.php?id_feedback=<?= $log['id_feedback']; ?>" class="btn btn-primary btn-sm"><i class="fa-solid fa-circle-info"></i> Detail</a></td>
+                                            <td><?= isset($feedback['id_feedback']) ? $feedback['id_feedback'] : 'Tidak tersedia'; ?></td>
+                                            <td><?= isset($feedback['tanggal_feedback']) ? $feedback['tanggal_feedback'] : 'Tidak tersedia'; ?></td>
+                                            <td><i>
+                                                    <?php 
+                                                    $status_class = '';
+                                                    $status_text = $feedback['status'];
+
+                                                    if ($feedback['status'] == 'pending') {
+                                                        $status_class = 'text-danger';
+                                                        $status_text = 'Pending';
+                                                    } elseif ($feedback['status'] == 'diproses') {
+                                                        $status_class = 'text-warning';
+                                                        $status_text = 'Diproses';
+                                                    } elseif ($feedback['status'] == 'selesai') {
+                                                        $status_class = 'text-success';
+                                                        $status_text = 'Selesai';
+                                                    }
+                                                    ?>
+                                                    <span class="<?= $status_class; ?>"><?= $status_text; ?></span>
+                                                </i></td>
+                                            <td><?= isset($feedback['nama_pengguna']) ? $feedback['nama_pengguna'] : 'Tidak tersedia'; ?></td>
+                                            <td><i>
+                                                <?php 
+                                                $status_class = '';
+                                                $status_text = $feedback['nama_kategori'];
+
+                                                if ($feedback['nama_kategori'] == 'Negatif') {
+                                                    $status_class = 'text-danger';
+                                                } elseif ($feedback['nama_kategori'] == 'Positif') {
+                                                    $status_class = 'text-success';
+                                                } elseif ($feedback['nama_kategori'] == 'Saran') {
+                                                    $status_class = 'text-primary';
+                                                }
+                                                ?>
+                                                <span class="<?= $status_class; ?>"><?= $status_text; ?></span>
+                                            </i></td>
+                                            <td title="<?= $feedback['isi_feedback']; ?>"><?= substr($feedback['isi_feedback'], 0, 55); ?><?= strlen($feedback['isi_feedback']) > 55 ? '...' : ''; ?></td>
+                                            <td><a href="detail_feedback.php?id_feedback=<?= $feedback['id_feedback']; ?>" class="btn btn-primary btn-sm"><i class="fa-solid fa-circle-info"></i> Detail</a></td>
                                         </tr>
                                     <?php endwhile; ?>
                                 <?php else : ?>
                                     <tr>
-                                        <td colspan="6" class="text-center">Belum ada log aktivitas yang tersedia.</td>
+                                        <td colspan="6" class="text-center">Belum ada feedback yang tersedia.</td>
                                     </tr>
                                 <?php endif; ?>
                             </tbody>

@@ -7,18 +7,20 @@ if ($_SESSION['role_user'] !== 'karyawan') {
     exit;
 }
 
-if (isset($_POST['id_feedback'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_feedback = $_POST['id_feedback'];
+    $id_karyawan = $_SESSION['id_user'];
 
-    $sql_update = "UPDATE feedback SET status = 'diproses' WHERE id_feedback = ?";
+    $sql_update = "UPDATE feedback SET status = 'diproses', id_pemroses = ? WHERE id_feedback = ?";
     $stmt = $conn->prepare($sql_update);
-    $stmt->bind_param("i", $id_feedback);
-    $stmt->execute();
+    $stmt->bind_param('ii', $id_karyawan, $id_feedback);
 
-    $_SESSION['feedback_diproses'] = "Status feedback #" . $id_feedback . " diperbarui ke 'Diproses.'";
-    header('Location: daftar_feedback.php');
-    exit;
-} else {
+    if ($stmt->execute()) {
+        $_SESSION['feedback_diproses'] = "Feedback berhasil diproses.";
+    } else {
+        $_SESSION['feedback_diproses'] = "Terjadi kesalahan saat memproses feedback.";
+    }
+
     header('Location: daftar_feedback.php');
     exit;
 }

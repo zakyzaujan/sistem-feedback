@@ -9,6 +9,11 @@ if ($_SESSION['role_user'] !== 'pengguna') {
 
 $id_user = $_SESSION['id_user']; 
 
+$sql_user = "SELECT nama_user FROM user WHERE id_user = '$id_user'";
+$result_user = $conn->query($sql_user);
+$user = $result_user->fetch_assoc();
+$nama_user = $user['nama_user'];
+
 $result_kategori = $conn->query("SELECT * FROM kategori_feedback");
 ?>
 
@@ -43,7 +48,7 @@ $result_kategori = $conn->query("SELECT * FROM kategori_feedback");
         <div class="main-content">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container">
-                    <a class="navbar-brand" href="dashboard_user.php" id="judul"><i class="fa-solid fa-house"></i> Sistem Feedback | Pengguna</a>
+                    <a class="navbar-brand" href="dashboard_user.php" id="judul"><i class="fa-solid fa-house"></i> Sistem Feedback | <?=$nama_user;?></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>

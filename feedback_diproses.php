@@ -7,8 +7,18 @@ if ($_SESSION['role_user'] !== 'karyawan') {
     exit;
 }
 
+$id_karyawan = $_SESSION['id_user'];
+
+$sql_user = "SELECT nama_user FROM user WHERE id_user = '$id_karyawan'";
+$result_user = $conn->query($sql_user);
+$user = $result_user->fetch_assoc();
+$nama_user = $user['nama_user'];
+
 $balasan_dikirim = isset($_SESSION['balasan_dikirim']) ? $_SESSION['balasan_dikirim'] : null;
 unset($_SESSION['balasan_dikirim']);
+
+$validasi_gagal = isset($_SESSION['validasi_gagal']) ? $_SESSION['validasi_gagal'] : null;
+unset($_SESSION['validasi_gagal']);
 
 $sql_feedback = "SELECT feedback.*, 
                         kategori_feedback.nama_kategori, 
@@ -16,10 +26,14 @@ $sql_feedback = "SELECT feedback.*,
                  FROM feedback 
                  INNER JOIN kategori_feedback ON feedback.id_kategori = kategori_feedback.id_kategori 
                  INNER JOIN user ON feedback.id_user = user.id_user
-                 WHERE feedback.status = 'diproses'
+                 WHERE feedback.status = 'diproses' AND feedback.id_pemroses = ?
                  ORDER BY feedback.tanggal_feedback ASC";
 
-$result_feedback = $conn->query($sql_feedback);
+$stmt = $conn->prepare($sql_feedback);
+$stmt->bind_param('i', $id_karyawan);
+$stmt->execute();
+$result_feedback = $stmt->get_result();
+
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +68,7 @@ $result_feedback = $conn->query($sql_feedback);
         <div class="main-content">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container">
-                    <a class="navbar-brand" href="dashboard_karyawan.php" id="judul"><i class="fa-solid fa-house"></i> Sistem Feedback | Karyawan</a>
+                    <a class="navbar-brand" href="dashboard_karyawan.php" id="judul"><i class="fa-solid fa-house"></i> Sistem Feedback | <?=$nama_user;?></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -85,7 +99,7 @@ $result_feedback = $conn->query($sql_feedback);
 
             <div class="container animation mt-5">
                 <h3 class="text-center mb-4"><i class="fa-regular fa-folder"></i> List Pemrosesan Feedback</h3>
-                <p class="text-muted text-center mb-5">Feedback yang sedang diproses oleh karyawan.</p>
+                <p class="text-muted text-center mb-5">Feedback yang sedang diproses oleh karyawan dengan akun ini.</p>
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
@@ -96,6 +110,13 @@ $result_feedback = $conn->query($sql_feedback);
                         <?php if ($balasan_dikirim): ?>
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 <?= htmlspecialchars($balasan_dikirim); ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php endif; ?>
+                        <!-- Alert Validasi Gagal -->
+                        <?php if ($validasi_gagal): ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <?= htmlspecialchars($validasi_gagal); ?>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         <?php endif; ?>
@@ -159,7 +180,7 @@ $result_feedback = $conn->query($sql_feedback);
                                     <?php endwhile; ?>
                                 <?php else : ?>
                                     <tr>
-                                        <td colspan="7" class="text-center">Tidak ada feedback yang sedang diproses.</td>
+                                        <td colspan="7" class="text-center">Tidak ada feedback yang perlu diproses.</td>
                                     </tr>
                                 <?php endif; ?>
                             </tbody>

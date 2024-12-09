@@ -77,7 +77,18 @@ if (isset($_GET['id_feedback'])) {
         <div class="main-content">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container">
-                    <a href="<?php echo ($role_user == 'karyawan') ? 'log_aktivitas.php' : 'feedback_saya.php'; ?>" class="btn btn-warning"> <i class="fa-solid fa-arrow-left"></i> Kembali </a>
+                    <a href="<?php 
+                        if ($role_user == 'admin') {
+                            echo 'semua_feedback.php';
+                        } elseif ($role_user == 'karyawan') {
+                            echo 'log_aktivitas.php';
+                        } elseif ($role_user == 'user') {
+                            echo 'feedback_saya.php';
+                        }
+                        ?>" 
+                        class="btn btn-warning"> 
+                        <i class="fa-solid fa-arrow-left"></i> Kembali 
+                    </a>
                 </div>
             </nav>
 
@@ -120,7 +131,7 @@ if (isset($_GET['id_feedback'])) {
                                 <?php if ($feedback['balasan']) : ?>
                                     <ul class="info-list">
                                         <li><strong>Karyawan:</strong> <span class="text-success"><?= htmlspecialchars($feedback['nama_karyawan']); ?></span></li>
-                                        <li><strong>Tanggal Balasan:</strong> <?= htmlspecialchars($feedback['tanggal_balasan']); ?></li>
+                                        <li><strong>Tanggal Dibalas:</strong> <?= htmlspecialchars($feedback['tanggal_balasan']); ?></li>
                                         <li><strong>Isi Balasan:</strong> <?= nl2br(htmlspecialchars($feedback['balasan'])); ?></li>
                                     </ul>
                                 <?php else : ?>

@@ -24,10 +24,6 @@ $query_total_feedback = "SELECT COUNT(*) AS total_feedback FROM feedback";
 $result_total_feedback = $conn->query($query_total_feedback);
 $total_feedback = $result_total_feedback->fetch_assoc()['total_feedback'];
 
-$query_feedback_selesai = "SELECT COUNT(*) AS selesai FROM feedback WHERE status = 'selesai'";
-$result_feedback_selesai = $conn->query($query_feedback_selesai);
-$feedback_selesai = $result_feedback_selesai->fetch_assoc()['selesai'];
-
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +57,7 @@ $feedback_selesai = $result_feedback_selesai->fetch_assoc()['selesai'];
         <div class="main-content">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container">
-                    <a class="navbar-brand fw-bold" href="dashboard_admin.php" id="judul"><i class="fa-solid fa-house"></i> Sistem Feedback | Admin</a>
+                    <a class="navbar-brand fw-bold" href="dashboard_admin.php" id="judul"><i class="fa-solid fa-house"></i> Sistem Feedback | <?=$nama_user;?></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -102,7 +98,7 @@ $feedback_selesai = $result_feedback_selesai->fetch_assoc()['selesai'];
                         <div class="col-md-4">
                             <div class="card text-white bg-primary mb-3">
                                 <div class="card-body text-center">
-                                    <h5 class="card-title">Total Akun pada Sistem ini</h5>
+                                    <h5 class="card-title">Total Akun Terdaftar</h5>
                                     <p class="card-text fs-4"><b><?= $total_users ?></b></p>
                                 </div>
                             </div>

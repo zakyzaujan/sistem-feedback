@@ -39,11 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt_update->execute();
 
     $id_karyawan = $_SESSION['id_user'];
-    $tanggal_balasan = date('Y-m-d H:i:s');
     $sql_log = "INSERT INTO log_aktivitas (id_feedback, id_karyawan, balasan, tanggal_balasan) 
-                VALUES (?, ?, ?, ?)";
+                VALUES (?, ?, ?, NOW())";
     $stmt_log = $conn->prepare($sql_log);
-    $stmt_log->bind_param("iiss", $id_feedback, $id_karyawan, $balasan, $tanggal_balasan);
+    $stmt_log->bind_param("iis", $id_feedback, $id_karyawan, $balasan);
     $stmt_log->execute();
 
     $_SESSION['balasan_dikirim'] = "Balasan berhasil dikirim!";

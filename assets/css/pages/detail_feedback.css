@@ -9,6 +9,12 @@ html, body {
     height: 100%;
 }
 
+.admin{
+    background-image: linear-gradient(to right, #868f96 0%, #596164 100%);
+    width: 10%;
+    min-width: 150px;
+}
+
 .pengguna{
     background-image: linear-gradient(to top, #88d3ce 0%, #6e45e2 100%);
     width: 10%;
