@@ -82,7 +82,7 @@ if (isset($_GET['id_feedback'])) {
                             echo 'semua_feedback.php';
                         } elseif ($role_user == 'karyawan') {
                             echo 'log_aktivitas.php';
-                        } elseif ($role_user == 'user') {
+                        } elseif ($role_user == 'pengguna') {
                             echo 'feedback_saya.php';
                         }
                         ?>" 
