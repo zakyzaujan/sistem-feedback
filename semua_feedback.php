@@ -155,7 +155,7 @@ $result_feedback = $conn->query($sql_feedback);
                                     <?php endwhile; ?>
                                 <?php else : ?>
                                     <tr>
-                                        <td colspan="6" class="text-center">Belum ada feedback yang tersedia.</td>
+                                        <td colspan="7" class="text-center">Belum ada feedback yang tersedia.</td>
                                     </tr>
                                 <?php endif; ?>
                             </tbody>

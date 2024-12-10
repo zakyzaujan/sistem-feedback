@@ -2,7 +2,7 @@
 $host = 'localhost';
 $user = 'root';
 $password = '';
-$dbname = 'feedback_system';
+$dbname = 'sistem_feedback';
 
 $conn = new mysqli($host, $user, $password, $dbname);
 

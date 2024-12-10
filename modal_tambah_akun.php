@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status_akun = 'aktif';
 
     if ($stmt->execute()) {
-    $_SESSION['akun_ditambah'] = 'Akun "' . '<strong>' . $nama_user . '</strong>' . '" berhasil ditambahkan.';
+    $_SESSION['akun_ditambah'] = 'Akun "' . $nama_user . '" berhasil ditambahkan.';
     header('Location: manajemen_akun.php');
     } else {
     echo "Error: " . $stmt->error;

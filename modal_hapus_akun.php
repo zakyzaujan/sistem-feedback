@@ -22,7 +22,7 @@ if (isset($_POST['delete_user_id'])) {
         $stmt_delete->bind_param("i", $user_id);
 
         if ($stmt_delete->execute()) {
-            $_SESSION['akun_dihapus'] = 'Akun "' . '<strong>' . $nama_user . '</strong>' . '" berhasil dihapus.';
+            $_SESSION['akun_dihapus'] = 'Akun "' . $nama_user . '" berhasil dihapus.';
             header('Location: manajemen_akun.php');
         } else {
             echo "Error: " . $stmt_delete->error;
