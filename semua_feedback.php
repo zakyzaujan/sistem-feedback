@@ -2,7 +2,6 @@
 session_start();
 include 'config.php';
 
-// Cek apakah pengguna adalah admin
 if ($_SESSION['role_user'] !== 'admin') {
     header('Location: index.php');
     exit;
@@ -14,19 +13,19 @@ $result_user = $conn->query($sql_user);
 $user = $result_user->fetch_assoc();
 $nama_user = $user['nama_user'];
 
-// Query untuk menghitung total feedback
 $query_total_feedback = "SELECT COUNT(*) AS total_feedback FROM feedback";
 $result_total_feedback = $conn->query($query_total_feedback);
 $total_feedback = $result_total_feedback->fetch_assoc()['total_feedback'];
 
-// Query untuk menampilkan data dari tabel feedback
 $sql_feedback = "SELECT feedback.*, 
                         user.nama_user AS nama_pengguna,
                         kategori_feedback.nama_kategori 
                  FROM feedback 
-                 INNER JOIN user ON feedback.id_user = user.id_user
+                 LEFT JOIN user ON feedback.id_user = user.id_user
                  INNER JOIN kategori_feedback ON feedback.id_kategori = kategori_feedback.id_kategori
                  ORDER BY feedback.tanggal_feedback ASC";
+
+
 $result_feedback = $conn->query($sql_feedback);
 ?>
 
@@ -132,8 +131,10 @@ $result_feedback = $conn->query($sql_feedback);
                                                     }
                                                     ?>
                                                     <span class="<?= $status_class; ?>"><?= $status_text; ?></span>
-                                                </i></td>
-                                            <td><?= isset($feedback['nama_pengguna']) ? $feedback['nama_pengguna'] : 'Tidak tersedia'; ?></td>
+                                            </i></td>
+                                            <td>
+                                                <?= isset($feedback['nama_pengguna']) ? $feedback['nama_pengguna'] : '<i class="text-danger">Tidak Tersedia</i>'; ?>
+                                            </td>
                                             <td><i>
                                                 <?php 
                                                 $status_class = '';

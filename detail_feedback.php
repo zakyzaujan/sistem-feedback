@@ -14,6 +14,7 @@ $role_user = $_SESSION['role_user'];
 if (isset($_GET['id_feedback'])) {
     $id_feedback = $_GET['id_feedback'];
 
+    // Cek role dan sesuaikan filter
     $sql_detail = "SELECT feedback.*, 
                           user.nama_user AS nama_pengguna, 
                           karyawan.nama_user AS nama_karyawan, 
@@ -26,15 +27,30 @@ if (isset($_GET['id_feedback'])) {
                   LEFT JOIN user AS karyawan ON log_aktivitas.id_karyawan = karyawan.id_user 
                   INNER JOIN kategori_feedback ON feedback.id_kategori = kategori_feedback.id_kategori 
                   WHERE feedback.id_feedback = ?";
-    $stmt = $conn->prepare($sql_detail);
-    $stmt->bind_param("i", $id_feedback);
+
+    if ($role_user == 'pengguna') {
+        // Tambahkan filter agar pengguna hanya dapat melihat feedback miliknya
+        $sql_detail .= " AND feedback.id_user = ?";
+        $stmt = $conn->prepare($sql_detail);
+        $stmt->bind_param("ii", $id_feedback, $_SESSION['id_user']);
+    } elseif ($role_user == 'karyawan') {
+        // Tambahkan filter agar karyawan hanya dapat melihat feedback yang dia balas
+        $sql_detail .= " AND log_aktivitas.id_karyawan = ?";
+        $stmt = $conn->prepare($sql_detail);
+        $stmt->bind_param("ii", $id_feedback, $_SESSION['id_user']);
+    } else {
+        // Admin tidak memerlukan filter tambahan
+        $stmt = $conn->prepare($sql_detail);
+        $stmt->bind_param("i", $id_feedback);
+    }
+
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         $feedback = $result->fetch_assoc();
     } else {
-        echo "Data tidak ditemukan.";
+        echo "Data tidak ditemukan atau Anda tidak memiliki akses.";
         exit;
     }
 } else {
@@ -104,7 +120,7 @@ if (isset($_GET['id_feedback'])) {
                             <div class="feedback-detail">
                                 <h5 class="section-title">Informasi Feedback:</h5>
                                 <ul class="info-list">
-                                    <li><strong>Pengguna:</strong> <span class="text-primary"><?= htmlspecialchars($feedback['nama_pengguna']); ?></span></li>
+                                    <li><strong>Pengguna:</strong> <span class="text-primary"><?= isset($feedback['nama_pengguna']) ? $feedback['nama_pengguna'] : '<i class="text-danger">Tidak Tersedia</i>'; ?></span></li>
                                     <li><strong>Tanggal Kirim:</strong> <?= htmlspecialchars($feedback['tanggal_feedback']); ?></li>
                                     <li><strong>Tipe Feedback:</strong> 
                                         <?php

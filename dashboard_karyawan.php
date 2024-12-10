@@ -14,11 +14,27 @@ $result_user = $conn->query($sql_user);
 $user = $result_user->fetch_assoc();
 $nama_user = $user['nama_user'];
 
-$query_pending_feedback = "SELECT COUNT(*) AS pending FROM feedback WHERE status = 'pending'";
+$query_pending_feedback = "
+    SELECT COUNT(*) AS pending 
+    FROM feedback 
+    WHERE status = 'pending' 
+    AND EXISTS (
+        SELECT 1 
+        FROM user 
+        WHERE user.id_user = feedback.id_user
+    )";
 $result_pending_feedback = $conn->query($query_pending_feedback);
 $pending_feedback = $result_pending_feedback->fetch_assoc()['pending'];
 
-$query_feedback_diproses = "SELECT COUNT(*) AS diproses FROM feedback WHERE status = 'diproses'";
+$query_feedback_diproses = "
+    SELECT COUNT(*) AS diproses 
+    FROM feedback 
+    WHERE status = 'diproses' 
+    AND EXISTS (
+        SELECT 1 
+        FROM user 
+        WHERE user.id_user = feedback.id_user
+    )";
 $result_feedback_diproses = $conn->query($query_feedback_diproses);
 $feedback_diproses = $result_feedback_diproses->fetch_assoc()['diproses'];
 
