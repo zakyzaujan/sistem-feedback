@@ -118,7 +118,7 @@
         </p>
         <br>
         <div class="text-center mb-3">
-            <a href="login.php" class="btn btn-custom"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+            <a href="login.php" class="btn btn-custom"><i class="fa-solid fa-right-to-bracket"></i> Menu Login</a>
         </div>
         <br><br>
         <div class="extra-info text-dark">
