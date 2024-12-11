@@ -1,56 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Selamat Datang - Sistem Feedback</title>
+    <link href="assets/css/pages/login.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         body {
             margin: 0;
             padding: 0;
             height: 100vh;
-            background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
+            background-image: url('assets/img/empty-elegant-background-with-copy-space.jpg');
             background-size: cover;
+            background-position: center center;
             position: relative;
             color: white;
-            font-family: 'Arial', sans-serif;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            animation: fadeIn 1.5s ease;
+            padding-bottom: 36px;
         }
 
-        h1, p, .btn-container, footer, .extra-info, .carousel {
-            position: relative;
-            z-index: 1;
-            margin: 10px auto;
-            max-width: 800px;
-        }
-
-        h1 {
-            font-size: 2.8rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        p {
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-            line-height: 1.6;
-            padding: 0 15px;
-        }
-
-        .btn-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
+        .animation {
+            animation: fadeIn 1.0s ease;
         }
 
         .btn-custom {
@@ -59,8 +47,9 @@
             padding: 12px 25px;
             border: none;
             border-radius: 50px;
-            background: white;
-            color: #09203f;
+            background-color: #0c3483 !important;
+            border-color: #0c3483 !important;
+            color: white;
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -70,90 +59,80 @@
         .btn-custom:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            background-color: #a2b6df !important;
+            border-color: #a2b6df !important;
         }
 
-        .extra-info {
-            margin-top: 50px;
-            padding: 0 15px;
+        .card-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+        }
+
+        .extra-info ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-left: 0;
+            text-align: center;
+        }
+
+        .extra-info li {
+            margin-bottom: 8px;
+            text-align: center;
+            line-height: 1.5;
         }
 
         .extra-info h3 {
             font-size: 1.4rem;
             font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .extra-info ul {
-            text-align: left;
-            margin: 20px auto;
-            max-width: 700px;
-            font-size: 1rem;
-            list-style-type: disc;
-            padding-left: 20px;
-        }
-
-        .extra-info ul li {
-            margin-bottom: 15px;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            margin-bottom: 10px;
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            p {
-                font-size: 1rem;
-            }
-
             .btn-custom {
-                font-size: 0.9rem;
-                padding: 10px 20px;
+                width: 100%;
+                padding: 10px;
             }
 
-            .extra-info h3 {
-                font-size: 1.2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            p {
-                font-size: 0.9rem;
-            }
-
-            .btn-custom {
-                font-size: 0.8rem;
-                padding: 8px 15px;
+            .card-container {
+                padding: 15px;
             }
         }
     </style>
 </head>
-<body>
-    <img src="assets/icons/index_logo.png" alt="Logo Sistem Feedback" style="max-width: 100px; margin-bottom: 20px;">
-    <h1>Selamat Datang di Sistem Feedback PT Xyz</h1>
-    <p>
-        Kami hadir untuk membantu Anda memberikan masukan, saran, atau laporan 
-        secara efisien. Tingkatkan komunikasi dan kolaborasi melalui platform kami.
-    </p>
-    <div class="btn-container">
-        <a href="login.php" class="btn btn-custom"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
-    </div>
-    <div class="extra-info">
-        <h3>Kenapa Memilih Sistem Feedback?</h3>
-        <ul>
-            <li>Mudah digunakan oleh semua kalangan</li>
-            <li>Memastikan semua feedback dikelola dengan baik</li>
-            <li>Respons cepat terhadap saran dan laporan</li>
-        </ul>
+
+<body class="bg-dark text-white d-flex flex-column justify-content-center align-items-center" style="height: 100vh;">
+
+    <!-- Image -->
+    <img src="assets/icons/index_logo.png" alt="Logo Sistem Feedback" class="mb-4 " style="max-width: 120px;">
+
+    <!-- Card Container -->
+    <div class="card-container animation">
+        <h1 class="text-center text-dark">Selamat Datang di Sistem Feedback PT XYZ</h1>
+        <br>
+        <p class="text-muted text-center">
+            Kami hadir untuk membantu Anda memberikan masukan, saran, atau laporan secara efisien. Tingkatkan komunikasi
+            dan kolaborasi melalui platform kami.
+        </p>
+        <br>
+        <div class="text-center mb-3">
+            <a href="login.php" class="btn btn-custom"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+        </div>
+        <br><br>
+        <div class="extra-info text-dark">
+            <h3>Kenapa Memilih Sistem Feedback?</h3>
+            <ul>
+                <li><i class="fa fa-check-circle"></i> Mudah digunakan oleh semua kalangan.</li>
+                <li><i class="fa fa-check-circle"></i> Memastikan semua feedback dikelola dengan baik.</li>
+                <li><i class="fa fa-check-circle"></i> Respons cepat terhadap saran dan laporan.</li>
+            </ul>
+
+        </div>
     </div>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </body>
+
 </html>

@@ -164,19 +164,24 @@ $result_users = $conn->query($query_users);
                                             </td>
                                             <td><?= $user['tanggal_bergabung'] ?></td>
                                             <td>
-                                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal"
-                                                        data-id="<?= $user['id_user'] ?>"
-                                                        data-nama="<?= $user['nama_user'] ?>"
-                                                        data-email="<?= $user['email_user'] ?>"
-                                                        data-role="<?= $user['role_user'] ?>"
-                                                        data-status="<?= $user['status_akun'] ?>">
-                                                    <i class="fa-regular fa-pen-to-square"></i> Edit
-                                                </button>
-                                                    
-                                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteUserModal"
-                                                        data-id="<?= $user['id_user'] ?>"
-                                                    <i class="fa-solid fa-trash"></i> Hapus
-                                                </button>
+                                                <?php if ($user['role_user'] !== 'admin'): ?>
+                                                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal"
+                                                            data-id="<?= $user['id_user'] ?>"
+                                                            data-nama="<?= $user['nama_user'] ?>"
+                                                            data-email="<?= $user['email_user'] ?>"
+                                                            data-password="<?= $user['password_user'] ?>"
+                                                            data-role="<?= $user['role_user'] ?>"
+                                                            data-status="<?= $user['status_akun'] ?>">
+                                                        <i class="fa-regular fa-pen-to-square"></i> Edit
+                                                    </button>
+                                                        
+                                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteUserModal"
+                                                            data-id="<?= $user['id_user'] ?>">
+                                                        <i class="fa-solid fa-trash"></i> Hapus
+                                                    </button>
+                                                <?php else: ?>
+                                                    <span class="text-muted"><i>Tidak Tersedia</i></span>
+                                                <?php endif; ?>
                                             </td>
                                         </tr>
                                     <?php endwhile; ?>
@@ -220,9 +225,8 @@ $result_users = $conn->query($query_users);
                         <div class="mb-3">
                             <label for="role_user" class="form-label">Role</label>
                             <select class="form-select" id="role_user" name="role_user">
-                                <option value="admin">1 - Admin</option>
-                                <option value="karyawan">2 - Karyawan</option>
-                                <option value="pengguna">3 - Pengguna</option>
+                                <option value="karyawan">1 - Karyawan</option>
+                                <option value="pengguna">2 - Pengguna</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-success mt-2 mb-2"><i class="fa-solid fa-plus"></i> Tambahkan Akun</button>
@@ -253,11 +257,19 @@ $result_users = $conn->query($query_users);
                             <input type="email" class="form-control" id="edit_email_user" name="edit_email_user" required>
                         </div>
                         <div class="mb-3">
+                            <label for="edit_password_user" class="form-label">Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="edit_password_user" name="edit_password_user" required>
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('edit_password_user', this)">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mb-3">
                             <label for="edit_role_user" class="form-label">Role</label>
                             <select class="form-select" id="edit_role_user" name="edit_role_user">
-                                <option value="admin">1 - Admin</option>
-                                <option value="karyawan">2 - Karyawan</option>
-                                <option value="pengguna">3 - Pengguna</option>
+                                <option value="karyawan">1 - Karyawan</option>
+                                <option value="pengguna">2 - Pengguna</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -311,18 +323,21 @@ $result_users = $conn->query($query_users);
             const userId = button.getAttribute('data-id');
             const nama = button.getAttribute('data-nama');
             const email = button.getAttribute('data-email');
+            const password = button.getAttribute('data-password');
             const role = button.getAttribute('data-role');
             const status = button.getAttribute('data-status');
 
             const inputUserId = editUserModal.querySelector('#edit_user_id');
             const inputNama = editUserModal.querySelector('#edit_nama_user');
             const inputEmail = editUserModal.querySelector('#edit_email_user');
+            const inputPassword = editUserModal.querySelector('#edit_password_user');
             const selectRole = editUserModal.querySelector('#edit_role_user');
             const selectStatus = editUserModal.querySelector('#edit_status_akun');
 
             inputUserId.value = userId;
             inputNama.value = nama;
             inputEmail.value = email;
+            inputPassword.value = password;
             selectRole.value = role;
             selectStatus.value = status;
         });
@@ -338,6 +353,22 @@ $result_users = $conn->query($query_users);
             const inputDeleteUserId = deleteUserModal.querySelector('#delete_user_id');
             inputDeleteUserId.value = userId;
         });
+    </script>
+    <script>
+        function togglePasswordVisibility(inputId, button) {
+            const input = document.getElementById(inputId);
+            const icon = button.querySelector('i');
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
     </script>
 </body>
 </html>

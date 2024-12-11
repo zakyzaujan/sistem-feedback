@@ -120,7 +120,7 @@ if (isset($_GET['id_feedback'])) {
                             <div class="feedback-detail">
                                 <h5 class="section-title">Informasi Feedback:</h5>
                                 <ul class="info-list">
-                                    <li><strong>Pengguna:</strong> <span class="text-primary"><?= isset($feedback['nama_pengguna']) ? $feedback['nama_pengguna'] : '<i class="text-danger">Tidak Tersedia</i>'; ?></span></li>
+                                    <li><strong>Pengguna:</strong> <span class="text-primary"><?= isset($feedback['nama_pengguna']) ? $feedback['nama_pengguna'] : '<i class="text-danger">Terhapus</i>'; ?></span></li>
                                     <li><strong>Tanggal Kirim:</strong> <?= htmlspecialchars($feedback['tanggal_feedback']); ?></li>
                                     <li><strong>Tipe Feedback:</strong> 
                                         <?php

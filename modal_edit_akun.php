@@ -8,9 +8,10 @@ if ($_SESSION['role_user'] !== 'admin') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['edit_nama_user'], $_POST['edit_email_user'], $_POST['edit_role_user'], $_POST['edit_status_akun'], $_POST['edit_user_id'])) {
+    if (isset($_POST['edit_nama_user'], $_POST['edit_email_user'], $_POST['edit_password_user'], $_POST['edit_role_user'], $_POST['edit_status_akun'], $_POST['edit_user_id'])) {
         $nama_user = $_POST['edit_nama_user'];
         $email_user = $_POST['edit_email_user'];
+        $password_user = $_POST['edit_password_user'];
         $role_user = $_POST['edit_role_user'];
         $status_akun = $_POST['edit_status_akun'];
         $user_id = $_POST['edit_user_id'];
@@ -20,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
 
-        $stmt = $conn->prepare("UPDATE user SET nama_user = ?, email_user = ?, role_user = ?, status_akun = ? WHERE id_user = ?");
-        $stmt->bind_param("ssssi", $nama_user, $email_user, $role_user, $status_akun, $user_id);
+        $stmt = $conn->prepare("UPDATE user SET nama_user = ?, email_user = ?, password_user = ?, role_user = ?, status_akun = ? WHERE id_user = ?");
+        $stmt->bind_param("ssssi", $nama_user, $email_user, $password_user, $role_user, $status_akun, $user_id);
 
         if ($stmt->execute()) {
             $_SESSION['akun_diedit'] = "Data akun berhasil diperbarui.";

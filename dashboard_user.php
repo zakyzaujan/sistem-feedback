@@ -38,7 +38,7 @@ $feedback_selesai = $result_feedback_selesai->fetch_assoc()['selesai'];
     <link href="assets/css/pages/dashboard_user.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        @keyframes fadeIn {
+          @keyframes fadeIn {
             from {
                 opacity: 0;
                 transform: translateY(10px);

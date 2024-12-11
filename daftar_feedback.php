@@ -136,7 +136,7 @@ $result_feedback = $conn->query($sql_feedback);
                                             } elseif ($feedback['nama_kategori'] == 'Positif') {
                                                 $status_class = 'text-success';
                                             } elseif ($feedback['nama_kategori'] == 'Saran') {
-                                                $status_class = 'text-warning';
+                                                $status_class = 'text-primary';
                                             }
                                             ?>
                                             <span class="<?= $status_class; ?>"><?= $status_text; ?></span>

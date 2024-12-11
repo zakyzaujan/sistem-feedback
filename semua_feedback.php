@@ -100,7 +100,7 @@ $result_feedback = $conn->query($sql_feedback);
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Tanggal</th>
+                                    <th>Tanggal Diajukan</th>
                                     <th>Status</th>
                                     <th>Pengguna</th>
                                     <th>Kategori</th>
@@ -133,7 +133,7 @@ $result_feedback = $conn->query($sql_feedback);
                                                     <span class="<?= $status_class; ?>"><?= $status_text; ?></span>
                                             </i></td>
                                             <td>
-                                                <?= isset($feedback['nama_pengguna']) ? $feedback['nama_pengguna'] : '<i class="text-danger">Tidak Tersedia</i>'; ?>
+                                                <?= isset($feedback['nama_pengguna']) ? $feedback['nama_pengguna'] : '<i class="text-danger">Terhapus</i>'; ?>
                                             </td>
                                             <td><i>
                                                 <?php 

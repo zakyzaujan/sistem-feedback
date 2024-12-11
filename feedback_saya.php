@@ -98,7 +98,7 @@ $result_feedback_user = $conn->query($sql_feedback_user);
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Tanggal</th>
+                                        <th>Tanggal Diajukan</th>
                                         <th>Kategori</th>
                                         <th>Isi Feedback</th>
                                         <th>Status</th>
