@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         $stmt = $conn->prepare("UPDATE user SET nama_user = ?, email_user = ?, password_user = ?, role_user = ?, status_akun = ? WHERE id_user = ?");
-        $stmt->bind_param("ssssi", $nama_user, $email_user, $password_user, $role_user, $status_akun, $user_id);
+        $stmt->bind_param("sssssi", $nama_user, $email_user, $password_user, $role_user, $status_akun, $user_id);
 
         if ($stmt->execute()) {
             $_SESSION['akun_diedit'] = "Data akun berhasil diperbarui.";

@@ -30,8 +30,6 @@ $feedback_selesai = $result_feedback_selesai->fetch_assoc()['selesai'];
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
-         background-blend-mode: multiply,multiply; -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Pengguna - Sistem Feedback | Pengguna</title>
