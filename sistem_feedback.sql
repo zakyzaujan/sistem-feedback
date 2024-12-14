@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2024 at 04:57 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Dec 14, 2024 at 09:06 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,9 +42,6 @@ CREATE TABLE `deleted_users` (
 --
 
 INSERT INTO `deleted_users` (`id_user`, `nama_user`, `email_user`, `role_user`, `status_akun`, `tanggal_bergabung`, `tanggal_dihapus`) VALUES
-('2', 'pengguna1', 'pengguna1@gmail.com', 'pengguna', 'aktif', '2024-12-13 22:23:36', '2024-12-13 22:50:42'),
-('3', 'karyawan1', 'karyawan1@gmail.com', 'karyawan', 'aktif', '2024-12-13 22:24:06', '2024-12-13 22:50:56'),
-('4', 'a', 'a@gmail.coma', 'karyawan', 'aktif', '2024-12-13 22:52:02', '2024-12-13 22:52:06');
 
 -- --------------------------------------------------------
 
@@ -117,8 +114,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `nama_user`, `email_user`, `password_user`, `role_user`, `status_akun`, `tanggal_bergabung`) VALUES
-(1, 'admin', 'admin@gmail.com', 'admin', 'admin', 'aktif', '2024-12-10 19:31:50');
-
+(1, 'admin', 'admin@gmail.com', 'admin', 'admin', 'aktif', '2024-12-10 19:31:50'),
 --
 -- Indexes for dumped tables
 --
@@ -159,7 +155,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id_feedback` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_feedback` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `kategori_feedback`
@@ -171,13 +167,13 @@ ALTER TABLE `kategori_feedback`
 -- AUTO_INCREMENT for table `log_aktivitas`
 --
 ALTER TABLE `log_aktivitas`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
@@ -187,8 +183,7 @@ ALTER TABLE `user`
 -- Constraints for table `feedback`
 --
 ALTER TABLE `feedback`
-  ADD CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`id_kategori`) REFERENCES `kategori_feedback` (`id_kategori`),
-  ADD CONSTRAINT `feedback_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
+  ADD CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`id_kategori`) REFERENCES `kategori_feedback` (`id_kategori`);
 
 --
 -- Constraints for table `log_aktivitas`
